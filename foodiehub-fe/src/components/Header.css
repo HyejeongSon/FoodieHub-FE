@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    position: relative;
+    background-color: white;
+    width: 100%;
+    height: 200px;
+}
+
+.logo-wrapper {
+    margin-top: -90px;
+    display: inline-block;
+    background: #ffffff;
+    position: relative;
+    left: 50.5%;
+    transform: translate(-50%, -50%);
+}
+
+.logo {
+    width: 277px;
+    height: auto;
+    margin: 0 20px;
+}
+
+.img {
+    width: 277px;
+    height: auto;
+    /*background: #fff;*/
+}
+
+.checkered-bar {
+    margin-top: 160px;
+    transform: translate(-50%, -50%);
+    height: 28px;
+    padding-top: 3px;
+    width: 200%;
+    background-image:
+        linear-gradient(45deg, #ff6f61 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #ff6f61 25%),
+        linear-gradient(-45deg, #ff6f61 25%, transparent 25%),
+        linear-gradient(-45deg, transparent 75%, #ff6f61 75%);
+    background-size: 30px 30px;
+    background-position: 0 8.5px, -15px 23.5px, 0 -6.5px, 15px 8.5px;
+    /* 체커보드 크기 */
+}
+
+.nav {
+    position: absolute;
+    top: 90px;
+    right: 8%;
+}
+
+.button {
+    color: #ff6f61;
+    font-size: 14px;
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #ffffff;
+    border: 1px solid #FD5E53;
+    border-radius: 50px !important;
+}
+
+/* 반응형 설정 */
+@media (max-width: 768px) {
+    .checkered-bar {
+        background-size: 30px 30px;
+        /* 모바일에서 체커보드 크기 축소 */
+    }
+
+    .logo {
+        width: 200px;
+        /* 모바일에서 로고 크기 축소 */
+    }
+}
