@@ -54,13 +54,16 @@ function Login() {
                 console.log("사용자 정보:", userInfo);
 
                 // 사용자 상태 업데이트
-                setUser({
-                    email: userInfo.email,
-                    name : userInfo.name,
-                    nickname : userInfo.nickname,
-                    provider : userInfo.provider,
-                    role: userInfo.role || "ROLE_USER",
-                });
+                // setUser({
+                //     userid: userInfo.userid,
+                //     cellphone: userInfo.cellphone,
+                //     email: userInfo.email,
+                //     name : userInfo.name,
+                //     nickname : userInfo.nickname,
+                //     provider : userInfo.provider,
+                //     role: userInfo.role || "ROLE_USER",
+                // });
+                setUser(userInfo); // 최신 사용자 정보로 상태 업데이트
 
 
 

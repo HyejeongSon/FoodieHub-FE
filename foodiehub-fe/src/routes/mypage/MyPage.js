@@ -18,26 +18,29 @@ const MyPage = () => {
         const fetchUserData = async () => {
             try {
                 const userInfo = await httpRequest("GET", "/api/auth/me");
-                // setUser({ username : data.username, nickname: data.nickname, email: data.email });
                 // 사용자 상태 업데이트
-                setUser({
-                    email: userInfo.email,
-                    name : userInfo.name,
-                    nickname : userInfo.nickname,
-                    provider : userInfo.provider,
-                    role: userInfo.role || "ROLE_USER",
+                // setUser(userInfo); // 최신 사용자 정보로 상태 업데이트
+                // 기존 상태와 새 데이터를 비교 후 업데이트
+                setUser((prevUser) => {
+                    if (
+                        prevUser &&
+                        prevUser.email === userInfo.email &&
+                        prevUser.nickname === userInfo.nickname &&
+                        prevUser.cellphone === userInfo.cellphone
+                    ) {
+                        return prevUser; // 기존 상태와 동일하면 업데이트하지 않음
+                    }
+                    return userInfo; // 상태가 변경된 경우만 업데이트
                 });
-
             } catch (error) {
                 console.error("GET /api/auth/me 실패:", error);
             }
         };
-
-        // 사용자 정보가 없는 경우만 동기화
-        if (!user.nickname || !user.email) {
-            fetchUserData();
-        }
-    },  [user, setUser]); // user와 setUser를 종속성 배열에 포함
+        
+        // 항상 호출하되, 내부에서 상태를 비교
+        fetchUserData();
+        
+    }, []); // 빈 배열로 설정하여 초기 렌더링 시 한 번만 실행
 
 
 
