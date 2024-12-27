@@ -20,14 +20,17 @@ const Header = () => {
         const fetchUserData = async () => {
             try {
                 const userInfo = await httpRequest("GET", "/api/auth/me"); //header/user
-                // setUser({email:data.email, role: data.role });
-                setUser({
-                    email: userInfo.email,
-                    name : userInfo.name,
-                    nickname : userInfo.nickname,
-                    provider : userInfo.provider,
-                    role: userInfo.role || "ROLE_USER",
-                });
+                // setUser({
+                //     userid: userInfo.userid,
+                //     cellphone : userInfo.cellphone,
+                //     email: userInfo.email,
+                //     name : userInfo.name,
+                //     nickname : userInfo.nickname,
+                //     provider : userInfo.provider,
+                //     role: userInfo.role || "ROLE_USER",
+                // });
+                setUser(userInfo); // 최신 사용자 정보로 상태 업데이트
+
 
             } catch (error) {
                 console.error("GET /api/auth/me 실패:", error);
@@ -35,7 +38,7 @@ const Header = () => {
         };
 
         fetchUserData();
-    }, [setUser]); // useEffect 종속성에 setUser 포함
+    }, []); 
 
 
     // **3. 사용자 상태 확인**

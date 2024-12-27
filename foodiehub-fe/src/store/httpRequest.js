@@ -19,19 +19,19 @@ export async function httpRequest(method, url, body = null) {
 
     try {
         // 요청 전 디버깅 로그
-        console.log(`HTTP 요청 시작: ${method} ${url}`);
-        console.log('요청 옵션:', options);
+        // console.log(`HTTP 요청 시작: ${method} ${url}`);
+        // console.log('요청 옵션:', options);
 
         const response = await fetch(url, options);
 
         // 응답 디버깅 로그
-        console.log(`HTTP 응답: ${response.status}`);
-        console.log('응답 헤더:', response.headers); // 헤더 확인
+        // console.log(`HTTP 응답: ${response.status}`);
+        // console.log('응답 헤더:', response.headers); // 헤더 확인
 
         // 디버깅 로그 추가
         console.log(`HTTP 요청: ${method} ${url}, 상태: ${response.status}`);
-        console.log('Response 객체:', response); // 서버 응답 전체 출력
-        console.log('Response 상태:', response.ok); // 응답 상태 확인
+        // console.log('Response 객체:', response); // 서버 응답 전체 출력
+        // console.log('Response 상태:', response.ok); // 응답 상태 확인
 
         if (response.ok) {
             const contentType = response.headers.get('content-type');
