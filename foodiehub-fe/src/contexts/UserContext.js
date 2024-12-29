@@ -14,7 +14,8 @@ export const UserProvider = ({ children }) => {
         nickname:"",
         provider:"",
         role:"",
-        businessno:""}); // 사용자 상태
+        businessno:"",
+        profileimageurl:"/img/default-profile.png",}); // 사용자 상태
         
     return (
         <UserContext.Provider value={{ user, setUser }}>
