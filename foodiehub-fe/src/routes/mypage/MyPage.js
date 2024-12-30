@@ -54,7 +54,6 @@ const MyPage = () => {
 
     return (
         <div>
-<<<<<<< HEAD
             <img
                 src={user.profileimageurl}
                 alt="프로필 사진 미리보기"
@@ -65,9 +64,6 @@ const MyPage = () => {
                     objectFit: "cover",
                 }}
             />
-=======
-        <hr className="divider" />
->>>>>>> yonggi1227
             <p>닉네임 <b>{user.nickname}</b></p>
             <p>아이디 <b>{user.email}</b></p>
             <button className="button" type="button" onClick={() =>navigate("/mypage/edit")}>회원정보수정</button>

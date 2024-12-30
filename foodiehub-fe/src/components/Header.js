@@ -83,7 +83,6 @@ const Header = () => {
     };
 
     return (
-<<<<<<< HEAD
         <header>
             <div className="checkered-bar"></div>
             <div className="logo-wrapper">
@@ -95,15 +94,6 @@ const Header = () => {
                 /></div>
             <nav className="nav">
                 {<button className="button" onClick={() => navigate("/")}>홈</button>}
-=======
-        <header  style ={{background: "grey"}}>
-            <div onClick={() => navigate("/main")}>
-                <img src="/img/foodieHub.png" // 로고 이미지 경로
-                     alt="foodieHub" width={50} height={50}/> 
-            </div>
-            <nav>
-                <button onClick={() => navigate("/")}>홈</button>
->>>>>>> yonggi1227
 
                 {user.email && user.role.split("_").pop() === "USER" &&
                     <button className="button" onClick={() => navigate("/mypage")}>마이페이지</button>

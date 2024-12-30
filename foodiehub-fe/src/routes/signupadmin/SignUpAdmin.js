@@ -126,8 +126,7 @@ const SignUp = () => {
                     <label htmlFor="password">비밀번호</label>
                     <input
                         type="password"
-                        id="password"
-                        name="password"
+                        name="password1"
                         value={formData.password}
                         onChange={handleInputChange}
                         placeholder="비밀번호를 입력하세요"
@@ -138,8 +137,7 @@ const SignUp = () => {
                     <label htmlFor="confirmPassword">비밀번호 확인</label>
                     <input
                         type="password"
-                        id="confirmPassword"
-                        name="confirmPassword"
+                        name="password2"
                         value={formData.confirmPassword}
                         onChange={handleInputChange}
                         placeholder="비밀번호를 다시 입력하세요"
