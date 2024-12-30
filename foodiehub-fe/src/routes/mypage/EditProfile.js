@@ -7,7 +7,7 @@ import axios from "axios";
 
 const EditProfile = () => {
     const navigate = useNavigate();
-    const [user, setUser] = useState(null); // 초기 상태가 null로 설정됨
+    const {user, setUser} = useUser();// Context에서 user와 setUser 가져오기 //useState(null); // 초기 상태가 null로 설정됨
     // 프로필 정보 상태
     const [profile, setProfile] = useState({
         nickname: "",
@@ -74,8 +74,9 @@ const EditProfile = () => {
 
     useEffect(() => {
         console.log("Profile 상태:", profile);
-    }, [profile]); //값이 변경될 때 console.log(profile)로 상태가 업데이트되는지 확인인    
+    }, [profile]); //값이 변경될 때 console.log(profile)로 상태가 업데이트되는지 확인    
 
+    // 사용자 정보 로드시 프로필 상태 초기화
     // user 상태가 변경될 때 profile 동기화 , 사용자 정보 동기화
     useEffect(() => {
         if (user) {
@@ -93,29 +94,29 @@ const EditProfile = () => {
         }
     }, [user]);
 
-    // 서버에서 사용자 데이터 가져오기
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const userInfo = await httpRequest("GET","/api/auth/me");
-                setUser(userInfo); // 최신 사용자 정보로 상태 업데이트
-                setProfile({
-                    nickname: userInfo.nickname || "",
-                    email: userInfo.email || "",
-                    cellphone: userInfo.cellphone || "",
-                });
-                // 프로필 이미지 미리보기 설정
-                if (userInfo.profileimageurl) {
-                    setImagePreview(userInfo.profileimageurl);
-                }
+    // // 서버에서 사용자 데이터 가져오기
+    // useEffect(() => {
+    //     const fetchUserData = async () => {
+    //         try {
+    //             const userInfo = await httpRequest("GET","/api/auth/me");
+    //             setUser(userInfo); // 최신 사용자 정보로 상태 업데이트
+    //             setProfile({
+    //                 nickname: userInfo.nickname || "",
+    //                 email: userInfo.email || "",
+    //                 cellphone: userInfo.cellphone || "",
+    //             });
+    //             // 프로필 이미지 미리보기 설정
+    //             if (userInfo.profileimageurl) {
+    //                 setImagePreview(userInfo.profileimageurl);
+    //             }
 
-            } catch (error) {
-                console.error("GET /api/auth/me 실패:", error);
-            }
-        };
+    //         } catch (error) {
+    //             console.error("GET /api/auth/me 실패:", error);
+    //         }
+    //     };
 
-        fetchUserData();
-    },  [setUser]); 
+    //     fetchUserData();
+    // },  [setUser]); 
 
 
     // 회원정보 저장
@@ -128,9 +129,19 @@ const EditProfile = () => {
             formData.append("nickname",profile.nickname);
             formData.append("email", profile.email); // 이메일 필드 추가
             formData.append("cellphone",profile.cellphone);
+            
+            // 현재 비밀번호와 새 비밀번호 추가
             if(profile.currentPassword) formData.append("currentPassword", profile.currentPassword);
             if(profile.newPassword) formData.append("newPassword",profile.newPassword);
-            if(profileImage) formData.append("profileImage",profileImage); // 파일 추가
+            
+            // if(profileImage) formData.append("profileImage",profileImage); // 파일 추가
+            // 이미지가 수정된 경우
+            if (profileImage) {
+                formData.append("profileImage", profileImage); // 새 이미지를 추가
+            } else {
+                formData.append("existingImageUrl", imagePreview); // 기존 이미지를 서버로 전달
+            }
+
             console.log("FormData 확인:", Array.from(formData.entries()));
 
             // 서버로 회원 정보 전송

@@ -10,41 +10,41 @@ const Header = () => {
     const { user, setUser } = useUser(); // Context에서 상태 가져오기
 
 
-    // **1. Context 상태 업데이트 확인**
-    useEffect(() => {
-        console.log("Header에서 Context 상태 업데이트 호출됨");
-    }, []);
+    // // **1. Context 상태 업데이트 확인**
+    // useEffect(() => {
+    //     console.log("Header에서 Context 상태 업데이트 호출됨");
+    // }, []);
 
-    // 네비게이션 함수
-    const handleNavigate = (path) => {
-        navigate(path);
-    };
+    // // 네비게이션 함수
+    // const handleNavigate = (path) => {
+    //     navigate(path);
+    // };
 
-    // **2. API 호출 및 사용자 상태 업데이트**
-    useEffect(() => {
-        console.log("Header 컴포넌트 useEffect 실행됨");
-        const fetchUserData = async () => {
-            try {
-                const userInfo = await httpRequest("GET", "/api/auth/me"); //header/user
-                // setUser({
-                //     userid: userInfo.userid,
-                //     cellphone : userInfo.cellphone,
-                //     email: userInfo.email,
-                //     name : userInfo.name,
-                //     nickname : userInfo.nickname,
-                //     provider : userInfo.provider,
-                //     role: userInfo.role || "ROLE_USER",
-                // });
-                setUser(userInfo); // 최신 사용자 정보로 상태 업데이트
+    // // **2. API 호출 및 사용자 상태 업데이트**
+    // useEffect(() => {
+    //     console.log("Header 컴포넌트 useEffect 실행됨");
+    //     const fetchUserData = async () => {
+    //         try {
+    //             const userInfo = await httpRequest("GET", "/api/auth/me"); //header/user
+    //             // setUser({
+    //             //     userid: userInfo.userid,
+    //             //     cellphone : userInfo.cellphone,
+    //             //     email: userInfo.email,
+    //             //     name : userInfo.name,
+    //             //     nickname : userInfo.nickname,
+    //             //     provider : userInfo.provider,
+    //             //     role: userInfo.role || "ROLE_USER",
+    //             // });
+    //             setUser(userInfo); // 최신 사용자 정보로 상태 업데이트
 
 
-            } catch (error) {
-                console.error("GET /api/auth/me 실패:", error);
-            }
-        };
+    //         } catch (error) {
+    //             console.error("GET /api/auth/me 실패:", error);
+    //         }
+    //     };
 
-        fetchUserData();
-    }, []); 
+    //     fetchUserData();
+    // }, []); 
 
 
     // **3. 사용자 상태 확인**
@@ -63,11 +63,15 @@ const Header = () => {
             deleteCookie("oauth2_auth_request");
             // setUser({ username: "", role: "" }); // 사용자 상태 초기화
             setUser({
+                userid: "",
+                cellphone: "",
                 email: "",
                 name: "",
                 nickname: "",
                 provider: "",
-                role: ""
+                role: "",
+                businessno: "",
+                profileimageurl: "/img/default-profile.png",
             });
             navigate("/main");
         } catch (error) {
@@ -86,7 +90,7 @@ const Header = () => {
                     src="/img/foodieHub.png"
                     alt="foodieHub" width={277} height={195} style={{ margin: '20px auto 0' }}
                     className="logo"
-                    onClick={() => handleNavigate("/main")}
+                    onClick={() => navigate("/main")}
                 /></div>
             <nav className="nav">
                 {<button className="button" onClick={() => navigate("/")}>홈</button>}

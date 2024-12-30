@@ -18,8 +18,8 @@ function App() {
     //     console.log("App.js의 현재 사용자 상태:", user);
     // }, [user]); // 상태 변경 시 확인
     return (
-        <UserProvider>
-            <Router>
+        <Router>
+            <UserProvider>
                 <Header />
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -30,8 +30,8 @@ function App() {
                     <Route path="/mypage" element={<MyPage />} />
                     <Route path="/mypage/edit" element={<EditProfile />} />
                 </Routes>
-            </Router>
-        </UserProvider>
+           </UserProvider>
+        </Router>
     );
   //   return (
   //     <Router>
