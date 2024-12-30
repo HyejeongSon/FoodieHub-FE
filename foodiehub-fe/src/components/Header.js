@@ -73,7 +73,7 @@ const Header = () => {
         <header  style ={{background: "grey"}}>
             <div onClick={() => navigate("/main")}>
                 <img src="/img/foodieHub.png" // 로고 이미지 경로
-                     alt="foodieHub" width={50} height={50}/>
+                     alt="foodieHub" width={50} height={50}/> 
             </div>
             <nav>
                 <button onClick={() => navigate("/")}>홈</button>

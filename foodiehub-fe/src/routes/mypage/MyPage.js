@@ -43,9 +43,10 @@ const MyPage = () => {
 
     return (
         <div>
+        <hr className="divider" />
             <p>닉네임 <b>{user.nickname}</b></p>
             <p>아이디 <b>{user.email}</b></p>
-            <button type="button" onClick={() =>navigate("/mypage/edit")}>회원정보수정</button>
+            <button className="button" type="button" onClick={() =>navigate("/mypage/edit")}>회원정보수정</button>
         </div>
     );
 };
