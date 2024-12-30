@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import logo from "../../image/logo-1.png";
+import "../../styles/SignupAdmin.css";
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
@@ -87,12 +89,14 @@ const SignUp = () => {
             }
         }
     };
-
+    
     return (
-        <div className="container my-3">
-            <h2>SIGN UP</h2>
-            <p>사장님 회원 가입</p>
-            <form onSubmit={handleSubmit}>
+        <div className="admin-container">
+            <img src={logo} alt="푸디허브 로고" className="logoImage" />
+        <div className="adminsignup-title">
+            <p class="adminTitle">사장님 회원가입</p>
+            <hr className="divider" />
+            <form className="adminsignup-form" onSubmit={handleSubmit}>
                 {apiResult && <div>{apiResult}</div>}
 
                 {errors.length > 0 && (
@@ -105,40 +109,44 @@ const SignUp = () => {
                     </div>
                 )}
 
-                <div>
-                    <label>아이디(Email)</label>
+                <div className='form-group'>
+                    <label htmlFor="email">아이디(Email)</label>
                     <input
+                        className="adminInput"
                         type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
+                        placeholder="이메일을 입력하세요"
                         required
                     />
                 </div>
 
-                <div>
-                    <label>비밀번호</label>
+                <div className="form-group">
+                    <label htmlFor="password">비밀번호</label>
                     <input
                         type="password"
-                        name="password1"
-                        value={formData.password1}
+                        id="password"
+                        name="password"
+                        value={formData.password}
                         onChange={handleInputChange}
-                        required
+                        placeholder="비밀번호를 입력하세요"
                     />
                 </div>
 
-                <div>
-                    <label>비밀번호 확인</label>
+                <div className="form-group">
+                    <label htmlFor="confirmPassword">비밀번호 확인</label>
                     <input
                         type="password"
-                        name="password2"
-                        value={formData.password2}
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        value={formData.confirmPassword}
                         onChange={handleInputChange}
-                        required
+                        placeholder="비밀번호를 다시 입력하세요"
                     />
                 </div>
 
-                <div>
+                <div className="form-group">
                     <label>닉네임</label>
                     <input
                         type="text"
@@ -149,7 +157,7 @@ const SignUp = () => {
                     />
                 </div>
 
-                <div>
+                <div className="form-group">
                     <label>실명</label>
                     <input
                         type="text"
@@ -160,7 +168,7 @@ const SignUp = () => {
                     />
                 </div>
 
-                <div>
+                <div className="form-group">
                     <label>전화번호</label>
                     <input
                         type="text"
@@ -171,7 +179,7 @@ const SignUp = () => {
                     />
                 </div>
 
-                <div>
+                <div className="input-button-group">
                     <label>사업자 등록번호</label>
                     <input
                         type="text"
@@ -183,16 +191,18 @@ const SignUp = () => {
                         조회
                     </button>
                 </div>
-
-                <button type="submit" disabled={!isBusinessValid}>
-                    회원가입
-                </button>
-
-                <div>
-                    이미 계정이 있으신가요? <a href="/login">로그인</a>
+                 {/* 회원가입 버튼 */}
+                <div className="button-group">
+                    <button className="prebtn" onClick={() => window.history.back()}>
+                        이전으로
+                    </button>
+                    <button className="signupbtn" type="submit">
+                        회원가입
+                    </button>
                 </div>
             </form>
         </div>
+    </div>
     );
 };
 

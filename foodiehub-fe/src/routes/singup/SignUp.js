@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { httpRequest } from "../../store/httpRequest"; // httpRequest를 불러옴
+import logo from "../../image/logo-1.png";
+import "../../styles/SignUp.css";
 
 function SignUp() {
     const [formData, setFormData] = useState({
@@ -61,9 +63,12 @@ function SignUp() {
     };
 
     return (
-        <div className="container my-3">
-            <h2>SIGN UP</h2>
-            <p>회원 가입</p>
+        <div className="user-container">
+            <div className="user-container">
+            <img src={logo} alt="푸디허브 로고" className="logoImage" />
+            <div className="signup-form">
+            <p class="userTitle">회원가입</p>
+            <hr className="divider" />
 
             {/* 폼 에러 표시 */}
             {errors.length > 0 && (
@@ -77,10 +82,12 @@ function SignUp() {
             )}
 
             <form onSubmit={handleSubmit}>
+            <div className="signup-title">
                 {/* 이메일 입력 */}
-                <div>
-                    <label>아이디(Email)</label>
+                <div className='form-group'>
+                    <label htmlFor="email">아이디(Email)</label>
                     <input
+                        className="Input"
                         type="email"
                         name="email"
                         value={formData.email}
@@ -90,8 +97,8 @@ function SignUp() {
                 </div>
 
                 {/* 비밀번호 입력 */}
-                <div>
-                    <label>비밀번호</label>
+                <div className='form-group'>
+                    <label htmlFor="password">비밀번호</label>
                     <input
                         type="password"
                         name="password1"
@@ -102,8 +109,8 @@ function SignUp() {
                 </div>
 
                 {/* 비밀번호 확인 */}
-                <div>
-                    <label>비밀번호 확인</label>
+                <div className='form-group'>
+                    <label htmlFor="confirmPassword">비밀번호 확인</label>
                     <input
                         type="password"
                         name="password2"
@@ -114,7 +121,7 @@ function SignUp() {
                 </div>
 
                 {/* 닉네임 */}
-                <div>
+                <div className='form-group'>
                     <label>닉네임</label>
                     <input
                         type="text"
@@ -132,7 +139,7 @@ function SignUp() {
                 </div>
 
                 {/* 실명 */}
-                <div>
+                <div className='form-group'>
                     <label>실명</label>
                     <input
                         type="text"
@@ -144,7 +151,7 @@ function SignUp() {
                 </div>
 
                 {/* 전화번호 */}
-                <div>
+                <div className='form-group'>
                     <label>전화번호</label>
                     <input
                         type="text"
@@ -157,14 +164,17 @@ function SignUp() {
 
                 {/* hidden input으로 role 전달 */}
                 <input type="hidden" name="role" value={formData.role} />
-
-                {/* 제출 버튼 */}
-                <button type="submit">회원가입</button>
-            </form>
-
-            {/* 로그인 안내 */}
-            <div>
-                이미 계정이 있으신가요? <a href="/login">로그인</a>
+                </div>
+                <div className="button-group">
+                    <button className="prebtn" onClick={() => window.history.back()}>
+                        이전으로
+                    </button>
+                    <button className="signupbtn" type="submit">
+                        회원가입
+                    </button>
+                </div>
+            </form>  
+                </div>
             </div>
         </div>
     );

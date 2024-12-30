@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { httpRequest } from "../../store/httpRequest"; // httpRequest를 불러옴
 import { useUser } from "../../contexts/UserContext"; // Context 추가
+import logo from "../../image/logo-1.png";
+import "../../styles/Login.css";
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -80,13 +82,15 @@ function Login() {
     };
 
     return (
+        <div className="login-container">
+            <img src={logo} alt="푸디허브 로고" className="logoImage" />
         <div>
             <form onSubmit={handleLogin}>
                 <div>
-                    <label>Email address</label>
                     <input
                         type="email"
-                        className="form-control"
+                        className="idInput"
+                        placeholder="이메일주소 입력"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         name="email"
@@ -94,38 +98,51 @@ function Login() {
                     />
                 </div>
                 <div>
-                    <label>Password</label>
+                <div>
                     <input
                         type="password"
+                        className="pwInput"
+                        placeholder="비밀번호 입력"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         name="password"
                         required
                     />
                 </div>
-                <button type="submit">로그인</button>
+                </div>
             </form>
-
-            <button type="button" onClick={() => navigate("/signup")}>
-                회원가입
-            </button>
-            <button type="button" onClick={() => navigate("/signup_admin")}>
-                사업자 회원가입
-            </button>
-
+            <div>
+                <button type="submit" className="loginbtn">로그인</button>
             <div>
                 {/* OAuth 로그인 버튼 */}
+                <hr className="divider" />
+                <p className="sns-login-text">SNS 로그인</p>
                 <a href="/oauth2/authorization/google">
-                    <img src="/img/google.png" width="50" height="50" alt="Google 로그인" />
+                    <img className="sns-btn" src="/img/google.png" width="50" height="50" alt="Google 로그인" />
                 </a>
                 <a href="/oauth2/authorization/kakao">
-                    <img src="/img/kakao.png" width="50" height="50" alt="Kakao 로그인" />
+                    <img className="sns-btn" src="/img/kakao.png" width="50" height="50" alt="Kakao 로그인" />
                 </a>
                 <a href="/oauth2/authorization/naver">
-                    <img src="/img/naver.png" width="50" height="50" alt="Naver 로그인" />
+                    <img className="sns-btn" src="/img/naver.png" width="50" height="50" alt="Naver 로그인" />
                 </a>
             </div>
-
+            </div>
+            <div>
+                <div className="register-row">
+                    <p className="register-question">계정이 없으신가요?</p>
+                    <p className="register-text" onClick={() => navigate("/signup")}>
+                        회원가입
+                    </p>
+                </div>
+                <div className="register-row">
+                    <p className="register-question">사장님이세요?</p>
+                    <p className="register-text" onClick={() => navigate("/signup_admin")}>
+                        사업자회원가입
+                    </p>
+                </div>
+            </div>
+        </div>
             {error && <p style={{ color: "red" }}>{error}</p>}
         </div>
     );
