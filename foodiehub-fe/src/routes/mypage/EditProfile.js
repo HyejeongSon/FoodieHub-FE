@@ -151,8 +151,12 @@ const EditProfile = () => {
             // const response = await axios.post("/api/user/update-profile", formData);
             // 서버로 전송
             const response = await axios.post("/api/user/update-profile", formData, {
-                headers: { "Content-Type": "multipart/form-data" },
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+                },
             });
+            console.log("서버로 전송",localStorage.getItem('access_token'));
 
             console.log("response는 출력되?",response);
             console.log("success는 출력되?",response.data.success);
