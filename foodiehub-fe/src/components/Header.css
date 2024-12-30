@@ -38,10 +38,10 @@
     padding-top: 3px;
     width: 200%;
     background-image:
-        linear-gradient(45deg, #ff6f61 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, #ff6f61 25%),
-        linear-gradient(-45deg, #ff6f61 25%, transparent 25%),
-        linear-gradient(-45deg, transparent 75%, #ff6f61 75%);
+        linear-gradient(45deg, #FD5E53 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #FD5E53 25%),
+        linear-gradient(-45deg, #FD5E53 25%, transparent 25%),
+        linear-gradient(-45deg, transparent 75%, #FD5E53 75%);
     background-size: 30px 30px;
     background-position: 0 8.5px, -15px 23.5px, 0 -6.5px, 15px 8.5px;
     /* 체커보드 크기 */
@@ -53,14 +53,15 @@
     right: 8%;
 }
 
-.button {
-    color: #ff6f61;
-    font-size: 14px;
+.header-button {
+    color: #FD5E53;
+    font-size: 12px;
+    height: auto;
     padding: 5px 10px;
     margin: 0 5px;
     background-color: #ffffff;
     border: 1px solid #FD5E53;
-    border-radius: 50px !important;
+    border-radius: 50px;
 }
 
 /* 반응형 설정 */

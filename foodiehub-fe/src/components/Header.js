@@ -10,41 +10,38 @@ const Header = () => {
     const { user, setUser } = useUser(); // Context에서 상태 가져오기
 
 
-    // // **1. Context 상태 업데이트 확인**
-    // useEffect(() => {
-    //     console.log("Header에서 Context 상태 업데이트 호출됨");
-    // }, []);
+    // **1. Context 상태 업데이트 확인**
+    useEffect(() => {
+        console.log("Header에서 Context 상태 업데이트 호출됨");
+    }, []);
 
-    // // 네비게이션 함수
-    // const handleNavigate = (path) => {
-    //     navigate(path);
-    // };
+    // 네비게이션 함수
+    const handleNavigate = (path) => {
+        navigate(path);
+    };
 
-    // // **2. API 호출 및 사용자 상태 업데이트**
-    // useEffect(() => {
-    //     console.log("Header 컴포넌트 useEffect 실행됨");
-    //     const fetchUserData = async () => {
-    //         try {
-    //             const userInfo = await httpRequest("GET", "/api/auth/me"); //header/user
-    //             // setUser({
-    //             //     userid: userInfo.userid,
-    //             //     cellphone : userInfo.cellphone,
-    //             //     email: userInfo.email,
-    //             //     name : userInfo.name,
-    //             //     nickname : userInfo.nickname,
-    //             //     provider : userInfo.provider,
-    //             //     role: userInfo.role || "ROLE_USER",
-    //             // });
-    //             setUser(userInfo); // 최신 사용자 정보로 상태 업데이트
+    // **2. API 호출 및 사용자 상태 업데이트**
+    useEffect(() => {
+        console.log("Header 컴포넌트 useEffect 실행됨");
+        const fetchUserData = async () => {
+            try {
+                const userInfo = await httpRequest("GET", "/api/auth/me"); //header/user
+                // setUser({email:data.email, role: data.role });
+                setUser({
+                    email: userInfo.email,
+                    name: userInfo.name,
+                    nickname: userInfo.nickname,
+                    provider: userInfo.provider,
+                    role: userInfo.role || "ROLE_USER",
+                });
 
+            } catch (error) {
+                console.error("GET /api/auth/me 실패:", error);
+            }
+        };
 
-    //         } catch (error) {
-    //             console.error("GET /api/auth/me 실패:", error);
-    //         }
-    //     };
-
-    //     fetchUserData();
-    // }, []); 
+        fetchUserData();
+    }, [setUser]); // useEffect 종속성에 setUser 포함
 
 
     // **3. 사용자 상태 확인**
@@ -63,15 +60,11 @@ const Header = () => {
             deleteCookie("oauth2_auth_request");
             // setUser({ username: "", role: "" }); // 사용자 상태 초기화
             setUser({
-                userid: "",
-                cellphone: "",
                 email: "",
                 name: "",
                 nickname: "",
                 provider: "",
-                role: "",
-                businessno: "",
-                profileimageurl: "/img/default-profile.png",
+                role: ""
             });
             navigate("/main");
         } catch (error) {
@@ -90,25 +83,25 @@ const Header = () => {
                     src="/img/foodieHub.png"
                     alt="foodieHub" width={277} height={195} style={{ margin: '20px auto 0' }}
                     className="logo"
-                    onClick={() => navigate("/main")}
+                    onClick={() => handleNavigate("/main")}
                 /></div>
             <nav className="nav">
-                {<button className="button" onClick={() => navigate("/")}>홈</button>}
+                {<button className="header-button" onClick={() => navigate("/")}>홈</button>}
 
                 {user.email && user.role.split("_").pop() === "USER" &&
-                    <button className="button" onClick={() => navigate("/mypage")}>마이페이지</button>
+                    <button className="header-button" onClick={() => navigate("/mypage")}>마이페이지</button>
                 }
 
                 {user.email && user.role === "ROLE_ADMIN" &&
-                    <button className="button" onClick={() => navigate("/mypage")}>관리자마이페이지</button>}
-
+                    <button className="header-button" onClick={() => navigate("/mypage")}>관리자마이페이지</button>}
+                    
 
                 {user.email &&
-                    <button className="button" id="logout-btn" onClick={handleLogout}>로그아웃</button>}
+                    <button className="header-button" id="logout-btn" onClick={handleLogout}>로그아웃</button>}
 
 
                 {!user.email &&
-                    <button className="button" onClick={() => navigate("/login")}>로그인</button>}
+                    <button className="header-button" onClick={() => navigate("/login")}>로그인</button>}
             </nav>
         </header>
     );

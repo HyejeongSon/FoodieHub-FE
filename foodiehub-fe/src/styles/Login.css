@@ -84,7 +84,7 @@
 
 .register-row {
   display: flex; /* 가로 정렬 */
-  gap: 140px; /* 질문과 링크 사이 간격 */
+  gap: 150px; /* 질문과 링크 사이 간격 */
   margin-bottom: 5px; /* 줄 간격 */
 }
 
@@ -96,7 +96,9 @@
 
 .register-text {
   font-size: 0.9rem; /* 회원가입 링크 크기 */
-  color: #6c63ff; /* 링크 색상 */
+  /* color: #6c63ff; 링크 색상 */  
+  color: #555; /* 텍스트 색상 */
+  font-weight: 600;
   cursor: pointer; /* 클릭 가능하도록 */
   text-align: right;
 }

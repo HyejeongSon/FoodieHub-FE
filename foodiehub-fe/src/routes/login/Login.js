@@ -83,7 +83,7 @@ function Login() {
 
     return (
         <div className="login-container">
-            <img src={logo} alt="푸디허브 로고" className="logoImage" />
+            <img src={logo} alt="푸디허브 로고" className="logoImage" onClick={() => navigate("/")}/>
         <div>
             <form onSubmit={handleLogin}>
                 <div>
@@ -132,7 +132,7 @@ function Login() {
                 <div className="register-row">
                     <p className="register-question">계정이 없으신가요?</p>
                     <p className="register-text" onClick={() => navigate("/signup")}>
-                        회원가입
+                        &ensp;회원가입
                     </p>
                 </div>
                 <div className="register-row">
