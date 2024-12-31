@@ -72,19 +72,36 @@ export async function httpRequest(method, url, body = null) {
         }
         // 에러 처리 추가
         const errorData = await response.json(); // JSON 응답 파싱
-        console.error(`HTTP 요청 실패: ${response.status}`, errorData);
+        
+        if (response.status === 401) {
+            // 401은 로그인 안 됨 or 토큰 만료 등 "의도된 시나리오"일 수 있으므로
+            // 콘솔에 error 대신, warn/info/로그 제거 등 선택적으로 처리 가능
+            console.info(`HTTP 요청: 401 (Unauthorized)`, errorData);
+          } else {
+            // 401이 아닌 다른 상태(4xx/5xx)는 진짜 에러로 간주
+            console.error(`HTTP 요청 실패: ${response.status}`, errorData);
+          }
+
         throw { status: response.status, response: errorData }; // 에러 객체를 throw
 
 
-        if (!response.ok) {
-            const errorData = await response.json(); // JSON 응답 파싱
-            console.error(`HTTP 요청 실패: ${response.status}`, errorData);
-            throw { status: response.status, response: errorData };
-        }
+
+
+        // if (!response.ok) {
+        //     const errorData = await response.json(); // JSON 응답 파싱
+        //     console.error(`HTTP 요청 실패: ${response.status}`, errorData);
+        //     throw { status: response.status, response: errorData };
+        // }
 
     } catch (error) {
-        console.error('HTTP 요청 중 오류 발생:', error);
-        throw error;
+        if (error.status === 401) {
+            // 401은 에러로 로그 남기지 않기
+            // console.info('로그인 필요 상태', error.response);
+          } else {
+            console.error('HTTP 요청 중 오류 발생:', error);
+          }
+    
+          throw error; // or 에러를 잡아먹어도 됨
     }
 }
 

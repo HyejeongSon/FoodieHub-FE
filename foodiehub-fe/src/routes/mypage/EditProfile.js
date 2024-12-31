@@ -1,8 +1,8 @@
 import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {httpRequest} from "../../store/httpRequest";
 import {useUser} from "../../contexts/UserContext";
 import axios from "axios";
+import { getProfile } from "../../store/UserStore";
 
 
 const EditProfile = () => {
@@ -63,11 +63,6 @@ const EditProfile = () => {
             reader.readAsDataURL(file);
         }
     }
-    const handleRemoveImage = () =>{
-        setProfileImage(null); // 선택된 파일 초기화
-        setImagePreview("/img/default-profile.png"); // 기본 이미지로 복구구
-    }
-
     useEffect(() => {
         console.log("EditProfile에서 사용자 상태 확인:", user);
     }, [user]); // 상태 변경 시 렌더링 확인
@@ -83,7 +78,6 @@ const EditProfile = () => {
             console.log("user 상태:", user);
             setProfile({
                 nickname: user.nickname || "",
-                email: user.email || "",
                 cellphone: user.cellphone || "",
             });
             console.log("profileimageurl 상태:", user.profileimageurl);
@@ -93,30 +87,45 @@ const EditProfile = () => {
             }
         }
     }, [user]);
+    
+    
+    const fetchUserProfile = async () => {
+        console.log("fetchUserProfile!!!!!!!!!!!!!!!!!!!");
+        setIsLoading(true);
+        try {
+            const response = await getProfile("GET","/api/user/profile");
+            console.log("@@@API 응답:", response); // API 호출 결과 확인
 
-    // // 서버에서 사용자 데이터 가져오기
-    // useEffect(() => {
-    //     const fetchUserData = async () => {
-    //         try {
-    //             const userInfo = await httpRequest("GET","/api/auth/me");
-    //             setUser(userInfo); // 최신 사용자 정보로 상태 업데이트
-    //             setProfile({
-    //                 nickname: userInfo.nickname || "",
-    //                 email: userInfo.email || "",
-    //                 cellphone: userInfo.cellphone || "",
-    //             });
-    //             // 프로필 이미지 미리보기 설정
-    //             if (userInfo.profileimageurl) {
-    //                 setImagePreview(userInfo.profileimageurl);
-    //             }
+            if (response.success) {
+                const userData = response.user;
+                console.log("@@@user 데이터?",userData);
+                setProfile({
+                    nickname: userData.nickname || "",
+                    email: userData.email || "",
+                    cellphone: userData.cellphone || "",
+                });
+                setImagePreview(userData.profileimageurl || "/img/default-profile.png");
+            } else {
+                console.error("API 실패 응답:", response); // 실패 시 응답 확인
+                throw new Error("사용자 정보를 가져오는 데 실패했습니다.");
+            }
+        } catch (error) {
+            console.error("사용자 정보 가져오기 오류:", error);
+            alert("사용자 정보를 가져오는 중 문제가 발생했습니다.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+    
+    useEffect(() => {
+        const initializeProfile = async () => {
+            // 항상 서버에서 최신 데이터 가져오기
+            await fetchUserProfile();
+        };
+    
+        initializeProfile();
 
-    //         } catch (error) {
-    //             console.error("GET /api/auth/me 실패:", error);
-    //         }
-    //     };
-
-    //     fetchUserData();
-    // },  [setUser]); 
+    }, []);
 
 
     // 회원정보 저장
@@ -145,11 +154,6 @@ const EditProfile = () => {
             console.log("FormData 확인:", Array.from(formData.entries()));
 
             // 서버로 회원 정보 전송
-            // const response = await axios.post("/api/user/update-profile", formData,{
-            //     headers:{"Content-Type" : "multipart/form-data"},
-            // });
-            // const response = await axios.post("/api/user/update-profile", formData);
-            // 서버로 전송
             const response = await axios.post("/api/user/update-profile", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
@@ -157,9 +161,6 @@ const EditProfile = () => {
                 },
             });
             console.log("서버로 전송",localStorage.getItem('access_token'));
-
-            console.log("response는 출력되?",response);
-            console.log("success는 출력되?",response.data.success);
             if (response.data.success) { // 서버가 성공적으로 처리한 경우
                 alert(response.data.message);
                 console.log("서버 응답 데이터:", response.data);
@@ -182,6 +183,9 @@ const EditProfile = () => {
                     currentPassword: "", // 현재 비밀번호 초기화
                     newPassword: "", // 새 비밀번호 초기화
                 }));
+
+                //  수정 후 사용자 정보 재요청
+                await fetchUserProfile(); // 최신 데이터 동기화
             } else {
                 throw new Error(response.message || "회원정보 저장에 실패했습니다.");
             }
@@ -193,6 +197,12 @@ const EditProfile = () => {
         }
     };
 
+
+    if (isLoading) {
+        return <p>로딩 중...</p>;
+    }
+    
+    
     return (
         <div>
             <h2>회원정보 수정</h2>
@@ -216,11 +226,7 @@ const EditProfile = () => {
                                 objectFit: "cover",
                             }}
                         />
-                        {/* <button
-                            type="button"
-                            onClick={handleRemoveImage}
-                            style={{display:"block",marginTop:"10px"}}
-                        >이미지 제거</button> */}
+
                         {/* 이미지 변경 버튼 */}
                         <label
                             htmlFor="imageUpload"
@@ -304,11 +310,9 @@ const EditProfile = () => {
                 </div>
                 }
                 <button type="submit">저장</button>
-                {/* <button onClick={handleSubmit}>저장</button> */}
 
             </form>
 
-            {/* 마이페이지로 이동 버튼 */}
             <button onClick={() => navigate('/mypage')} style={{ marginTop: "10px" }}>
                 마이페이지로 돌아가기
             </button>

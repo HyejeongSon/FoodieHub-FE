@@ -1,9 +1,9 @@
 // src/components/Header.js
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { httpRequest } from "../store/httpRequest";
 import { useUser } from "../contexts/UserContext"; // Context 추가
 import "./Header.css";
+import { getAuthMe,postLogout } from "../store/UserStore";
 
 const Header = () => {
     const navigate = useNavigate();
@@ -25,23 +25,27 @@ const Header = () => {
         console.log("Header 컴포넌트 useEffect 실행됨");
         const fetchUserData = async () => {
             try {
-                const userInfo = await httpRequest("GET", "/api/auth/me"); //header/user
-                // setUser({email:data.email, role: data.role });
+                const userInfo = await getAuthMe("GET", "/api/auth/me"); //header/user
                 setUser({
-                    email: userInfo.email,
-                    name: userInfo.name,
                     nickname: userInfo.nickname,
-                    provider: userInfo.provider,
                     role: userInfo.role || "ROLE_USER",
+                    profileimageurl : userInfo.profileimageurl || "/img/default-profile.png",
                 });
 
             } catch (error) {
-                console.error("GET /api/auth/me 실패:", error);
+                if (error.status === 401) {
+                    // “로그인 필요” 상황이므로 에러로 보지 말고 원하는 처리를 해주기
+                    console.log('401! 로그인 필요');
+                    // 예) window.location.href = "/login";
+                  } else {
+                    // 나머지 진짜 오류
+                    console.error("auth/me 가져오기 실패:", error);
+                  }
             }
         };
 
         fetchUserData();
-    }, [setUser]); // useEffect 종속성에 setUser 포함
+    }, []); // "API" 한번만 호출하고 싶다,컴포넌트 최초 마운트시에만 한번 실행됩니다.
 
 
     // **3. 사용자 상태 확인**
@@ -53,18 +57,15 @@ const Header = () => {
     // 로그아웃 처리
     const handleLogout = async () => {
         try {
-            const response = await httpRequest("POST", "/api/auth/logout");
+            const response = await postLogout("POST", "/api/auth/logout");
 
             // 로컬 스토리지 및 상태 초기화
             localStorage.removeItem("access_token");
             deleteCookie("oauth2_auth_request");
-            // setUser({ username: "", role: "" }); // 사용자 상태 초기화
             setUser({
-                email: "",
-                name: "",
                 nickname: "",
-                provider: "",
-                role: ""
+                role: "",
+                profileimageurl: "",
             });
             navigate("/main");
         } catch (error) {
@@ -88,19 +89,19 @@ const Header = () => {
             <nav className="nav">
                 {<button className="header-button" onClick={() => navigate("/")}>홈</button>}
 
-                {user.email && user.role.split("_").pop() === "USER" &&
+                {user.nickname && user.role.split("_").pop() === "USER" &&
                     <button className="header-button" onClick={() => navigate("/mypage")}>마이페이지</button>
                 }
-
-                {user.email && user.role === "ROLE_ADMIN" &&
+         
+                {user.nickname && user.role === "ROLE_ADMIN" &&
                     <button className="header-button" onClick={() => navigate("/mypage")}>관리자마이페이지</button>}
                     
 
-                {user.email &&
+                {user.nickname &&
                     <button className="header-button" id="logout-btn" onClick={handleLogout}>로그아웃</button>}
 
 
-                {!user.email &&
+                {!user.nickname &&
                     <button className="header-button" onClick={() => navigate("/login")}>로그인</button>}
             </nav>
         </header>

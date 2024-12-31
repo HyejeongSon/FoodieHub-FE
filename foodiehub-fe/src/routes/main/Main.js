@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// import { httpRequest } from "../../store/httpRequest"; // httpRequest를 불러옴
 import { useUser } from "../../contexts/UserContext"; // Context 추가
 import useTokenStorage from "../../store/useTokenStorage"; // useTokenStorage를 불러옴
 
@@ -21,7 +20,7 @@ function Main() {
             <h1>메인 페이지 테스트 페이지 !!!</h1>
 
             {/* 조건부 렌더링: 사용자 정보 */}
-            {user.email ? (
+            {user.nickname ? (
                 <div>
                     <p>사용자 이름: <b>{user.name}</b></p>
                     <p>사용자 닉네임: <b>{user.nickname}</b></p>
