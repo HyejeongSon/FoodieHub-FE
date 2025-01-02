@@ -1,20 +1,21 @@
-// src/pages/MyPage/MyPage.js
-import React, {useState,useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../../contexts/UserContext"; // Context 추가
-
+import { httpRequest } from "../../store/httpRequest";
+import { useUser } from "../../contexts/UserContext";
+import "../../styles/MyPage.css";
+import StarRating from "./StarRating";
 
 const MyPage = () => {
     const navigate = useNavigate();
     // const { user, setUser } = useUser(); // Context에서 가져오기
     // const [imagePreview,setImagePreview] = useState(user?.profileimageurl ||"/img/default-profile.png"); // 미리보기
-    const { user, fetchUser } = useUser();
-
+    const { user, setUser, fetchUser } = useUser();
+    const [activeTab, setActiveTab] = useState("좋아요");
     // 상태 정의
     const [selectedItem, setSelectedItem] = useState(null); // 선택된 항목 상태
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // 삭제 모달 상태
     const [isEditModalOpen, setIsEditModalOpen] = useState(false); // 수정 모달 상태
-
+    
     // 임시 리뷰 데이터
     const [reviews, setReviews] = useState([
         {
@@ -33,22 +34,6 @@ const MyPage = () => {
         },
     ]);
 
-    return (
-        <div>
-            <img
-                src={user.profileimageurl}
-                alt="프로필 사진 미리보기"
-                style={{
-                    width: "70px",
-                    height: "70px",
-                    borderRadius: "50%",
-                    objectFit: "cover",
-                }}
-            />
-            <p>닉네임 <b>{user.nickname}</b></p>
-            <button className="button" type="button" onClick={() =>navigate("/mypage/edit")}>회원정보수정</button>
-        </div>
-    )
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -64,7 +49,7 @@ const MyPage = () => {
                 console.error("GET /api/auth/me 실패:", error);
             }
         };
-
+        
         if (!user.nickname || !user.email) {
             fetchUserData();
         }
