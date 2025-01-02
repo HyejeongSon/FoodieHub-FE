@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { httpRequest } from "../../store/httpRequest";
+import { fetchUserReviews, downloadReviewImage } from "../../store/ReviewStore";
 import { useUser } from "../../contexts/UserContext";
 import "../../styles/MyPage.css";
 import StarRating from "./StarRating";
@@ -15,24 +15,40 @@ const MyPage = () => {
     const [selectedItem, setSelectedItem] = useState(null); // 선택된 항목 상태
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // 삭제 모달 상태
     const [isEditModalOpen, setIsEditModalOpen] = useState(false); // 수정 모달 상태
-    
-    // 임시 리뷰 데이터
-    const [reviews, setReviews] = useState([
-        {
-            id: 1,
-            title: "리뷰 제목 1",
-            date: "2024-12-12",
-            content: "리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1",
-            rating: 4.5,
-        },
-        {
-            id: 2,
-            title: "리뷰 제목 2",
-            date: "2024-12-13",
-            content: "리뷰 내용 2",
-            rating: 3.5,
-        },
-    ]);
+    const [reviews, setReviews] = useState([]);
+    const [error, setError] = useState(null);
+
+    // 데이터 가져오기
+    useEffect(() => {
+        if (activeTab === "내 리뷰") {
+            const fetchReviews = async () => {
+                try {
+                    const data = await fetchUserReviews();
+                    setReviews(data);
+                    console.log(reviews);
+                } catch (err) {
+                    console.error("리뷰 데이터를 가져오는 중 오류 발생:", err);
+                    setError("리뷰 데이터를 불러오는 중 오류가 발생했습니다.");
+                }
+            };
+            fetchReviews();
+        }
+    }, [activeTab]); // '내 리뷰' 탭이 선택되었을 때만 데이터 가져오기
+
+    const handleImageDownload = async (filename) => {
+        try {
+            const imageBlob = await downloadReviewImage(filename);
+            const imageURL = URL.createObjectURL(imageBlob);
+            const a = document.createElement("a");
+            a.href = imageURL;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(imageURL);
+        } catch (err) {
+            console.error("이미지 다운로드 실패:", err);
+            alert("이미지를 다운로드할 수 없습니다.");
+        }
+    };
 
     // 삭제 기능
     const handleDelete = (item) => {
@@ -127,28 +143,42 @@ const MyPage = () => {
                 return (
                     <div className="review-container">
                         <h3>내 리뷰</h3>
-                        {reviews.map((review) => (
-                            <div key={review.id} className="review-item">
-                                <div className="review-header">
-                                    <div className="review-info">
-                                        <div className="review-date">{review.date}</div>
-                                        <div className="review-title">{review.title}</div>
-                                    </div>
-                                    <div className="review-rating">
-                                        <div className="rating-text-container">
-                                            <span className="rating-text">내점수</span>
-                                            <span className="rating-text">{review.rating} / 5</span>
+                        {error && <p className="error-message">{error}</p>}
+                        {reviews.length > 0 ? (
+                            reviews.map((review) => (
+                                <div key={review.id} className="review-item">
+                                    <div className="review-header">
+                                        <div className="review-info">
+                                            {review.createDate ? review.createDate.split("T")[0] : ""}
+                                            <div className="review-title">{review.storeName}</div>
                                         </div>
-                                        <StarRating voteAverage={review.rating} />
+                                        <div className="review-rating">
+                                            <span className="rating-text">내 점수: {review.avgRating} / 5</span>
+                                            <StarRating voteAverage={review.avgRating} />
+                                        </div>
+                                    </div>
+                                    <div className="review-content">{review.content}</div>
+                                    {/* {review.reviewImage && (
+                                        <div className="review-image">
+                                            <img
+                                                src={`/api/review/image/${review.reviewImage}`}
+                                                alt="리뷰 이미지"
+                                                onClick={() => handleImageDownload(review.reviewImage)}
+                                                style={{ cursor: "pointer", maxWidth: "100%", height: "auto" }}
+                                            />
+                                        </div>
+                                    )} */}
+                                    <div className="review-actions">
+                                        <button className="edit-button" onClick={() => navigate(`/mypage/ReviewEdit/${review.id}`)}>
+                                            수정
+                                        </button>
+                                        <button className="delete-button">삭제</button>
                                     </div>
                                 </div>
-                                <div className="review-content">{review.content}</div>
-                                <div className="review-actions">
-                                    <button className="edit-button" onClick={() => navigate("/mypage/ReviewEdit")}>수정</button>
-                                    <button className="delete-button" onClick={() => handleDelete(review)}>삭제</button>
-                                </div>
-                            </div>
-                        ))}
+                            ))
+                        ) : (
+                            <p>등록된 리뷰가 없습니다.</p>
+                        )}
                     </div>
                 );
             default:

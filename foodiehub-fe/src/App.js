@@ -32,7 +32,7 @@ function App() {
                     <Route path="/mypage/edit" element={<EditProfile />} />
                     <Route path="/mystore" element={<MyStore />} />
 
-                    <Route path="/mypage/reviewedit" element={<ReviewEdit />} />
+                    <Route path="/mypage/reviewedit/:reviewId" element={<ReviewEdit />} />
                 </Routes>
            </UserProvider>
         </Router>
