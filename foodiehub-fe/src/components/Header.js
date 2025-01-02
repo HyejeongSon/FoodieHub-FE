@@ -88,14 +88,13 @@ const Header = () => {
                     onClick={() => handleNavigate("/main")}
                 /></div>
             <nav className="nav">
-                {<button className="header-button" onClick={() => navigate("/")}>홈</button>}
 
                 {user.nickname && user.role.split("_").pop() === "USER" &&
                     <button className="header-button" onClick={() => navigate("/mypage")}>마이페이지</button>
                 }
          
                 {user.nickname && user.role === "ROLE_ADMIN" &&
-                    <button className="header-button" onClick={() => navigate("/mypage")}>관리자마이페이지</button>}
+                    <button className="header-button" onClick={() => navigate("/mystore")}>내 식당</button>}
                     
                 {user.nickname &&
                     <button className="header-button" id="logout-btn" onClick={handleLogout}>로그아웃</button>}

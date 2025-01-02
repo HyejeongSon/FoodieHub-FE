@@ -12,6 +12,7 @@ import SignUp from "./routes/singup/SignUp";
 import SignUpAdmin from "./routes/signupadmin/SignUpAdmin";
 import EditProfile from "./routes/mypage/EditProfile"
 import ReviewEdit from "./routes/mypage/ReviewEdit";
+import MyStore from "./routes/mystore/MyStore";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
                     <Route path="/signup_admin" element={<SignUpAdmin />} />
                     <Route path="/mypage" element={<MyPage />} />
                     <Route path="/mypage/edit" element={<EditProfile />} />
+                    <Route path="/mystore" element={<MyStore />} />
 
                     <Route path="/mypage/reviewedit" element={<ReviewEdit />} />
                 </Routes>
