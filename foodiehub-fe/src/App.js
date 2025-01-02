@@ -13,7 +13,7 @@ import SignUpAdmin from "./routes/signupadmin/SignUpAdmin";
 import EditProfile from "./routes/mypage/EditProfile"
 import ReviewEdit from "./routes/mypage/ReviewEdit";
 import MyStore from "./routes/mystore/MyStore";
-
+import StoreRegister from "./routes/mystore/StoreRegister";
 
 function App() {
     return (
@@ -28,6 +28,7 @@ function App() {
                     <Route path="/login_admin" element={<LoginAdmin />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/signup_admin" element={<SignUpAdmin />} />
+                    <Route path="/store_register" element={<StoreRegister />} />
                     <Route path="/mypage" element={<MyPage />} />
                     <Route path="/mypage/edit" element={<EditProfile />} />
                     <Route path="/mystore" element={<MyStore />} />
