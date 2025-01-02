@@ -71,22 +71,22 @@ const EditProfile = () => {
         console.log("Profile 상태:", profile);
     }, [profile]); //값이 변경될 때 console.log(profile)로 상태가 업데이트되는지 확인    
 
-    // 사용자 정보 로드시 프로필 상태 초기화
-    // user 상태가 변경될 때 profile 동기화 , 사용자 정보 동기화
-    useEffect(() => {
-        if (user) {
-            console.log("user 상태:", user);
-            setProfile({
-                nickname: user.nickname || "",
-                cellphone: user.cellphone || "",
-            });
-            console.log("profileimageurl 상태:", user.profileimageurl);
-            console.log("이미지 경로:", imagePreview);
-            if(user?.profileimageurl){
-                setImagePreview(user.profileimageurl);
-            }
-        }
-    }, [user]);
+    // // 사용자 정보 로드시 프로필 상태 초기화
+    // // user 상태가 변경될 때 profile 동기화 , 사용자 정보 동기화
+    // useEffect(() => {
+    //     if (user) {
+    //         console.log("user 상태:", user);
+    //         setProfile({
+    //             nickname: user.nickname || "",
+    //             cellphone: user.cellphone || "",
+    //         });
+    //         console.log("profileimageurl 상태:", user.profileimageurl);
+    //         console.log("이미지 경로:", imagePreview);
+    //         if(user?.profileimageurl){
+    //             setImagePreview(user.profileimageurl || "/img/default-profile.png");
+    //         }
+    //     }
+    // }, [user]);
     
     
     const fetchUserProfile = async () => {
@@ -119,13 +119,18 @@ const EditProfile = () => {
     
     useEffect(() => {
         const initializeProfile = async () => {
-            // 항상 서버에서 최신 데이터 가져오기
-            await fetchUserProfile();
+            if (user) { // user 상태가 초기화된 후에만 fetchUserProfile을 호출하도록 조건을 추가가
+                try {
+                    await fetchUserProfile(); // 사용자 프로필 동기화
+                } catch (error) {
+                    console.error("프로필 초기화 오류:", error);
+                }
+            }
         };
     
         initializeProfile();
 
-    }, []);
+    }, [user]);  // user 상태가 존재할 때만 실행
 
 
     // 회원정보 저장
