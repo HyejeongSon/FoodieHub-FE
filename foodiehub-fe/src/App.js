@@ -10,12 +10,15 @@ import LoginAdmin from "./routes/login/LoginAdmin";
 import MyPage from "./routes/mypage/MyPage";
 import SignUp from "./routes/singup/SignUp";
 import SignUpAdmin from "./routes/signupadmin/SignUpAdmin";
-import EditProfile from "./routes/mypage/EditProfile";
+import EditProfile from "./routes/mypage/EditProfile"
+import ReviewEdit from "./routes/mypage/ReviewEdit";
+
 
 function App() {
     return (
         <Router>
             <UserProvider>
+
                 <ConditionalHeader /> {/* 조건부 헤더 */}
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -26,8 +29,10 @@ function App() {
                     <Route path="/signup_admin" element={<SignUpAdmin />} />
                     <Route path="/mypage" element={<MyPage />} />
                     <Route path="/mypage/edit" element={<EditProfile />} />
+
+                    <Route path="/mypage/reviewedit" element={<ReviewEdit />} />
                 </Routes>
-            </UserProvider>
+           </UserProvider>
         </Router>
     );
 }

@@ -5,15 +5,16 @@ import { useUser } from "../contexts/UserContext"; // Context 추가
 import "./Header.css";
 import { getAuthMe,postLogout } from "../store/UserStore";
 
+
 const Header = () => {
     const navigate = useNavigate();
     const { user, setUser } = useUser(); // Context에서 상태 가져오기
 
 
-    // **1. Context 상태 업데이트 확인**
-    useEffect(() => {
-        console.log("Header에서 Context 상태 업데이트 호출됨");
-    }, []);
+    // // **1. Context 상태 업데이트 확인**
+    // useEffect(() => {
+    //     console.log("Header에서 Context 상태 업데이트 호출됨");
+    // }, []);
 
     // 네비게이션 함수
     const handleNavigate = (path) => {
@@ -96,7 +97,6 @@ const Header = () => {
                 {user.nickname && user.role === "ROLE_ADMIN" &&
                     <button className="header-button" onClick={() => navigate("/mypage")}>관리자마이페이지</button>}
                     
-
                 {user.nickname &&
                     <button className="header-button" id="logout-btn" onClick={handleLogout}>로그아웃</button>}
 
