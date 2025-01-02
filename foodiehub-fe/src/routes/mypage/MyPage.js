@@ -34,27 +34,6 @@ const MyPage = () => {
         },
     ]);
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const userInfo = await httpRequest("GET", "/api/auth/me");
-                setUser({
-                    email: userInfo.email,
-                    name: userInfo.name,
-                    nickname: userInfo.nickname,
-                    provider: userInfo.provider,
-                    role: userInfo.role || "ROLE_USER",
-                });
-            } catch (error) {
-                console.error("GET /api/auth/me 실패:", error);
-            }
-        };
-        
-        if (!user.nickname || !user.email) {
-            fetchUserData();
-        }
-    }, [user, setUser]);
-
     // 삭제 기능
     const handleDelete = (item) => {
         setSelectedItem(item); // 삭제하려는 항목 설정
