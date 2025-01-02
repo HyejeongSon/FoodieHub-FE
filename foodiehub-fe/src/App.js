@@ -10,7 +10,7 @@ import MyPage from "./routes/mypage/MyPage";
 import SignUp from "./routes/singup/SignUp";
 import SignUpAdmin from "./routes/signupadmin/SignUpAdmin";
 import EditProfile from "./routes/mypage/EditProfile"
-import Register from "./components/Register";
+import ReviewEdit from "./routes/mypage/ReviewEdit";
 
 function App() {
     // const [user, setUser] = useState({ username: "", role: "" }); // 사용자 상태 최상위에서 관리
@@ -19,8 +19,9 @@ function App() {
     //     console.log("App.js의 현재 사용자 상태:", user);
     // }, [user]); // 상태 변경 시 확인
     return (
-        <UserProvider>
-            <Router>
+        <Router>
+            <UserProvider>
+                <Header />
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/main" element={<Main />} />
@@ -29,10 +30,10 @@ function App() {
                     <Route path="/signup_admin" element={<SignUpAdmin />} />
                     <Route path="/mypage" element={<MyPage />} />
                     <Route path="/mypage/edit" element={<EditProfile />} />
-                    
+                    <Route path="/mypage/reviewedit" element={<ReviewEdit />} />
                 </Routes>
-            </Router>
-        </UserProvider>
+           </UserProvider>
+        </Router>
     );
   //   return (
   //     <Router>

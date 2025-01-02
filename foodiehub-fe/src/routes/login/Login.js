@@ -107,9 +107,9 @@ function Login() {
                     />
                 </div>
                 </div>
+                <button type="submit" className="loginbtn">로그인</button>
             </form>
             <div>
-                <button type="submit" className="loginbtn">로그인</button>
             <div>
                 {/* OAuth 로그인 버튼 */}
                 <hr className="divider" />
