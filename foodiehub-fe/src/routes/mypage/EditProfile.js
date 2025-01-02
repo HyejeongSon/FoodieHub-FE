@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {useUser} from "../../contexts/UserContext";
 import axios from "axios";
 import { getProfile } from "../../store/UserStore";
+import "../../styles/EditProfile.css";
 
 
 const EditProfile = () => {
@@ -70,24 +71,6 @@ const EditProfile = () => {
     useEffect(() => {
         console.log("Profile 상태:", profile);
     }, [profile]); //값이 변경될 때 console.log(profile)로 상태가 업데이트되는지 확인    
-
-    // // 사용자 정보 로드시 프로필 상태 초기화
-    // // user 상태가 변경될 때 profile 동기화 , 사용자 정보 동기화
-    // useEffect(() => {
-    //     if (user) {
-    //         console.log("user 상태:", user);
-    //         setProfile({
-    //             nickname: user.nickname || "",
-    //             cellphone: user.cellphone || "",
-    //         });
-    //         console.log("profileimageurl 상태:", user.profileimageurl);
-    //         console.log("이미지 경로:", imagePreview);
-    //         if(user?.profileimageurl){
-    //             setImagePreview(user.profileimageurl || "/img/default-profile.png");
-    //         }
-    //     }
-    // }, [user]);
-    
     
     const fetchUserProfile = async () => {
         console.log("fetchUserProfile!!!!!!!!!!!!!!!!!!!");
@@ -165,6 +148,7 @@ const EditProfile = () => {
                     Authorization: `Bearer ${localStorage.getItem('access_token')}`,
                 },
             });
+
             console.log("서버로 전송",localStorage.getItem('access_token'));
             if (response.data.success) { // 서버가 성공적으로 처리한 경우
                 alert(response.data.message);
@@ -195,8 +179,13 @@ const EditProfile = () => {
                 throw new Error(response.message || "회원정보 저장에 실패했습니다.");
             }
         } catch (error) {
-            console.error("회원정보 저장 중 오류 발생:", error);
-            alert("회원정보 저장에 실패했습니다. 다시 시도해주세요.");
+            console.error("회원정보 수정 중 오류 발생:", error);
+            if (error.response && error.response.data && error.response.data.errors) {
+                const validationErrors = error.response.data.errors;
+                alert(validationErrors.join("\n"));
+            } else {
+                alert("회원가입 중 알 수 없는 오류가 발생했습니다.");
+            }
         }finally{
             setIsLoading(false); // 로딩 종료
         }
@@ -209,12 +198,12 @@ const EditProfile = () => {
     
     
     return (
-        <div>
+        <div className="edit-container">
             <h2>회원정보 수정</h2>
             {isLoading && <p>저장 중입니다...</p>}
             <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <div>
-                    <label>프로필 사진</label>
+                    <label></label>
                     <div style={{ 
                         position: "relative", // 부모 요소에 상대 위치 설정
                         width: "150px",
@@ -263,7 +252,7 @@ const EditProfile = () => {
                     {/* <input type="file" accept="image/*" onChange={handleImageChange} /> */}
                 </div>
 
-                <div>
+                <div className="form-group">
                     <label>이메일</label>
                     <input
                         type="email"
@@ -273,7 +262,7 @@ const EditProfile = () => {
                     />
                 </div>
                 
-                <div>
+                <div className="form-group">
                     <label>닉네임</label>
                     <input
                         type="text"
@@ -283,7 +272,7 @@ const EditProfile = () => {
                     />
                 </div>
    
-                <div>
+                <div className="form-group">
                     <label>전화번호</label>
                     <input
                         type="text"
@@ -292,8 +281,9 @@ const EditProfile = () => {
                         onChange={handleChange}
                     />
                 </div>
-                { user?.provider =="local" &&
-                <div>
+
+                { user.role === "ROLE_ADMIN" &&
+                <div className="form-group">
                     <label>현재 비밀번호</label>
                     <input
                         type="password"
@@ -303,8 +293,8 @@ const EditProfile = () => {
                     />
                 </div>
                 }
-                { user?.provider =="local" &&
-                <div>
+                { user.role === "ROLE_ADMIN" &&
+                <div className="form-group">
                     <label>새 비밀번호</label>
                     <input
                         type="password"
@@ -314,13 +304,16 @@ const EditProfile = () => {
                     />
                 </div>
                 }
-                <button type="submit">저장</button>
-
+                <div className="buttons">
+                    <button className="back-button" type="button" onClick={() => navigate('/mypage')}>
+                    이전
+                    </button>
+                    <button className="save-button" type="submit">저장</button>
+                </div>
+      
             </form>
 
-            <button onClick={() => navigate('/mypage')} style={{ marginTop: "10px" }}>
-                마이페이지로 돌아가기
-            </button>
+            
         </div>
     );
 };

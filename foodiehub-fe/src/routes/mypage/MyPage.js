@@ -209,10 +209,21 @@ const MyPage = () => {
             <hr className="divider" />
             <div className="parent-container">
                 <div className="user-info-container">
-                    <div className="user-image"></div>
+                    {/* <div className="user-image"> */}
+                    <div>
+                        <img
+                            src={user.profileimageurl}
+                            alt="프로필 사진 미리보기"
+                            style={{
+                                width: "70px",
+                                height: "70px",
+                                borderRadius: "50%",
+                                objectFit: "cover",
+                            }}
+                        />
+                    </div>
                     <div className="user-details">
-                        <p className="nickname"> 닉네임 <b>{user.nickname}</b></p>
-                        <p className="email">아이디 <b>{user.email}</b></p>
+                        <p className="nickname"> <b>{user.nickname}</b></p>
                     </div>
                     <button
                         className="updatebutton"

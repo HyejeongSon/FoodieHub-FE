@@ -63,32 +63,32 @@ function Login() {
     return (
         <div className="login-container">
             <img src={logo} alt="푸디허브 로고" className="logoImage" onClick={() => navigate("/")}/>
-        <div>
-            <div> 
-                <div>
-                    {/* OAuth 로그인 버튼 */}
-                    <hr className="divider" />
-                    <p className="sns-login-text">SNS 로그인</p>
-                    <a href="/oauth2/authorization/google">
-                        <img className="sns-btn" src="/img/google.png" width="50" height="50" alt="Google 로그인" />
-                    </a>
-                    <a href="/oauth2/authorization/kakao">
-                        <img className="sns-btn" src="/img/kakao.png" width="50" height="50" alt="Kakao 로그인" />
-                    </a>
-                    <a href="/oauth2/authorization/naver">
-                        <img className="sns-btn" src="/img/naver.png" width="50" height="50" alt="Naver 로그인" />
-                    </a>
-                </div>
-            </div>
             <div>
-                <div className="register-row">
-                    <p className="register-question">사장님이세요?</p>
-                    <p className="register-text" onClick={() => navigate("/login_admin")}>
-                        사업자로그인
-                    </p>
+                <div> 
+                    <div>
+                        {/* OAuth 로그인 버튼 */}
+                        <hr className="divider" />
+                        <p className="sns-login-text">SNS 로그인</p>
+                        <a href="/oauth2/authorization/google">
+                            <img className="sns-btn" src="/img/google.png" width="50" height="50" alt="Google 로그인" />
+                        </a>
+                        <a href="/oauth2/authorization/kakao">
+                            <img className="sns-btn" src="/img/kakao.png" width="50" height="50" alt="Kakao 로그인" />
+                        </a>
+                        <a href="/oauth2/authorization/naver">
+                            <img className="sns-btn" src="/img/naver.png" width="50" height="50" alt="Naver 로그인" />
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <div className="register-row">
+                        <p className="register-question">사장님이세요?</p>
+                        <p className="register-text" onClick={() => navigate("/login_admin")}>
+                            사업자로그인
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
             {error && <p style={{ color: "red" }}>{error}</p>}
         </div>
     );
