@@ -77,7 +77,7 @@ const SignUp = () => {
                 },
             });
             alert("회원가입이 완료되었습니다.");
-            navigate("/login");
+            navigate("/login_admin");
         } catch (error) {
             console.error("회원가입 실패:", error);
 
@@ -194,7 +194,7 @@ const SignUp = () => {
                     <button className="prebtn" onClick={() => window.history.back()}>
                         이전으로
                     </button>
-                    <button className="signupbtn" type="submit">
+                    <button className="signupbtn" type="submit" disabled={!isBusinessValid}>
                         회원가입
                     </button>
                 </div>

@@ -89,7 +89,8 @@ const Header = () => {
                 /></div>
             <nav className="nav">
 
-                {user.nickname && user.role.split("_").pop() === "USER" &&
+            {/* user.role.split("_").pop() === "USER" && */}
+                {user.nickname && 
                     <button className="header-button" onClick={() => navigate("/mypage")}>마이페이지</button>
                 }
          

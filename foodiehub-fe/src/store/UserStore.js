@@ -4,12 +4,6 @@ export async function getAuthMe(method, url, body = null) {
         Authorization: `Bearer ${localStorage.getItem('access_token')}`,
     };
 
-    // 로그아웃 시 Authorization 헤더 제외
-    if (url === '/api/auth/logout') {
-        console.log('Deleting Authorization UserInfo for Logout Request');
-        delete headers.Authorization;
-    }
-
     const options = {
         method,
         headers,
@@ -218,12 +212,6 @@ export async function postLogin(method, url, body = null) {
         Authorization: `Bearer ${localStorage.getItem('access_token')}`,
     };
 
-    // 로그아웃 시 Authorization 헤더 제외
-    if (url === '/api/auth/logout') {
-        console.log('Deleting Authorization UserInfo for Logout Request');
-        delete headers.Authorization;
-    }
-
     const options = {
         method,
         headers,
@@ -325,11 +313,6 @@ export async function getProfile(method, url, body = null) {
         Authorization: `Bearer ${localStorage.getItem('access_token')}`,
     };
 
-    // 로그아웃 시 Authorization 헤더 제외
-    if (url === '/api/auth/logout') {
-        console.log('Deleting Authorization UserInfo for Logout Request');
-        delete headers.Authorization;
-    }
 
     const options = {
         method,
