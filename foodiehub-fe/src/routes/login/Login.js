@@ -130,9 +130,9 @@ function Login() {
             </div>
             <div>
                 <div className="register-row">
-                    <p className="register-question">계정이 없으신가요?</p>
+                    <p className="register-question">계정이 없으신가요?&ensp;</p>
                     <p className="register-text" onClick={() => navigate("/signup")}>
-                        &ensp;회원가입
+                        회원가입
                     </p>
                 </div>
                 <div className="register-row">

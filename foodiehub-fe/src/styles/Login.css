@@ -40,7 +40,39 @@
 .idInput:focus,
 .pwInput:focus {
   border: 1px solid #21BF73; /* 포커스 시 녹색 테두리 */
+  -webkit-animation: shadow-drop-2-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: shadow-drop-2-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
+@-webkit-keyframes shadow-drop-2-center {
+  0% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    -webkit-transform: translateZ(30px);
+            transform: translateZ(30px);
+    -webkit-box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.20);
+            box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.20);
+  }
+}
+
+@keyframes shadow-drop-2-center {
+  0% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    -webkit-transform: translateZ(30px);
+            transform: translateZ(30px);
+    -webkit-box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.20);
+            box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.20);
+  }
+}
+
 
 .idInput
 .pwInput
@@ -84,7 +116,7 @@
 
 .register-row {
   display: flex; /* 가로 정렬 */
-  gap: 150px; /* 질문과 링크 사이 간격 */
+  gap: 140px; /* 질문과 링크 사이 간격 */
   margin-bottom: 5px; /* 줄 간격 */
 }
 
