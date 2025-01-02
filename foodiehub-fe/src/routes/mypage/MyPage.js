@@ -81,25 +81,30 @@ const MyPage = () => {
         switch (activeTab) {
             case "좋아요":
                 return (
-                    <div className="likelistbox-container">
-                        <div className="likelistbox">
-                            <div className="image-placeholder">
-                                <i className="icon">📷</i>
-                            </div>
-                            <div className="content-section">
-                                <p>좋아요 항목 1</p>
-                                <button
-                                    className="delete-icon"
-                                    onClick={() => handleDelete({ id: "like1", name: "좋아요 항목 1" })}
-                                >
-                                    삭제
-                                </button>
-                            </div>
+                    <div class="image-container">
+                    <p class="restaurant-name">음식점 이름</p>
+                <div className="likelistbox-container">
+                    <div className="likelistbox">
+                        <div className="image-placeholder">
+                            <i className="icon">📷</i>
+                        </div>
+                        <div className="content-section">
+                            <p>북마크 항목 1</p>
+                            <button
+                                className="delete-icon"
+                                onClick={() => handleDelete({ id: "bookmark1", name: "북마크 항목 1" })}
+                            >
+                                삭제
+                            </button>
                         </div>
                     </div>
-                );
+                </div>
+                </div>
+                  );
             case "북마크":
                 return (
+                    <div class="image-container">
+                        <p class="restaurant-name">음식점 이름</p>
                     <div className="likelistbox-container">
                         <div className="likelistbox">
                             <div className="image-placeholder">
@@ -115,6 +120,7 @@ const MyPage = () => {
                                 </button>
                             </div>
                         </div>
+                    </div>
                     </div>
                 );
             case "내 리뷰":
@@ -209,7 +215,8 @@ const MyPage = () => {
             <hr className="divider" />
             <div className="parent-container">
                 <div className="user-info-container">
-                    <div className="user-image"></div>
+                    <div className="user-image">
+                    </div>
                     <div className="user-details">
                         <p className="nickname"> 닉네임 <b>{user.nickname}</b></p>
                         <p className="email">아이디 <b>{user.email}</b></p>
