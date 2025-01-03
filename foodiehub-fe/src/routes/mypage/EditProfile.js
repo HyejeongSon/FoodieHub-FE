@@ -281,9 +281,9 @@ const EditProfile = () => {
                         onChange={handleChange}
                     />
                 </div>
-
                 { user.role === "ROLE_ADMIN" &&
                 <div className="form-group">
+
                     <label>현재 비밀번호</label>
                     <input
                         type="password"
@@ -295,6 +295,7 @@ const EditProfile = () => {
                 }
                 { user.role === "ROLE_ADMIN" &&
                 <div className="form-group">
+
                     <label>새 비밀번호</label>
                     <input
                         type="password"

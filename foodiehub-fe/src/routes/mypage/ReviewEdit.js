@@ -12,7 +12,7 @@ const StarRating = ({ voteAverage = 0, onRate }) => {
       onRate(value);
     }
   };
-
+  
   return (
     <div className="star-rating">
       {[1, 2, 3, 4, 5].map((star) => (

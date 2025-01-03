@@ -104,17 +104,17 @@ const MyPage = () => {
                         <div className="image-placeholder">
                             <i className="icon">📷</i>
                         </div>
-                        <div className="content-section">
-                            <p>북마크 항목 1</p>
-                            <button
-                                className="delete-icon"
-                                onClick={() => handleDelete({ id: "bookmark1", name: "북마크 항목 1" })}
-                            >
-                                삭제
-                            </button>
+                            <div className="content-section">
+                                <p>북마크 항목 1</p>
+                                <button
+                                    className="delete-icon"
+                                    onClick={() => handleDelete({ id: "bookmark1", name: "북마크 항목 1" })}
+                                >
+                                    삭제
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
                   );
             case "북마크":
@@ -238,9 +238,9 @@ const MyPage = () => {
             </div>
         );
     };
-
+    
     return (
-        <div>
+        <div className="container-form">
             <h2>마이페이지</h2>
             <hr className="divider" />
             <div className="parent-container">
@@ -270,7 +270,7 @@ const MyPage = () => {
                     </button>
                 </div>
             </div>
-
+        
             <div className="tab-container">
                 <button
                     className={`tab-button ${activeTab === "좋아요" ? "active" : ""}`}
@@ -291,9 +291,9 @@ const MyPage = () => {
                     내 리뷰
                 </button>
             </div>
-
+        
             <div className="tab-content">{renderTabContent()}</div>
-
+            
             <DeleteModal
                 isOpen={isDeleteModalOpen}
                 onConfirm={confirmDelete}
@@ -306,6 +306,7 @@ const MyPage = () => {
                 selectedItem={selectedItem}
             />
         </div>
+        
     );
 };
 
