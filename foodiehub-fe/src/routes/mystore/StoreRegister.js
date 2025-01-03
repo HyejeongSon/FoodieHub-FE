@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { postStoreSave } from "../../store/UserStore";
+import { postStoreSave } from "../../store/StoreStore";
 
 const StoreRegister = () => {
     const navigate = useNavigate();
@@ -58,7 +58,10 @@ const StoreRegister = () => {
                 preview: URL.createObjectURL(file),
             };
         });
-        setImages(filePreviews);
+        setImages((prevImages) => [...prevImages, ...filePreviews]);
+    };
+    const removeImage = (index) => {
+        setImages((prevImages) => prevImages.filter((_, i) => i !== index));
     };
 
     const handleSubmit = async (event) => {
@@ -292,14 +295,55 @@ const StoreRegister = () => {
             </div><br />
 
             <label>사진 업로드</label>
-            <div>
+            {/* <div>
                 <input type="file" multiple onChange={handleImageChange} />
                 <div>
                     {images.map((img, index) => (
                         <img key={index} src={img.preview} alt={`Preview ${index}`} style={{ width: '120px', height: '120px', objectFit: 'cover' }} />
                     ))}
                 </div>
+            </div><br /> */}
+
+            <div>
+                <input type="file" multiple onChange={handleImageChange} />
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+                    {images.map((img, index) => (
+                        <div key={index} style={{ position: 'relative', display: 'inline-block' }}>
+                            <img
+                                src={img.preview}
+                                alt={`Preview ${index}`}
+                                style={{
+                                    width: '120px',
+                                    height: '120px',
+                                    objectFit: 'cover',
+                                    borderRadius: '8px',
+                                }}
+                            />
+                            <button
+                                type="button"
+                                onClick={() => removeImage(index)}
+                                style={{
+                                    position: 'absolute',
+                                    top: '5px',
+                                    right: '5px',
+                                    backgroundColor: 'red',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '50%',
+                                    cursor: 'pointer',
+                                    width: '20px',
+                                    height: '20px',
+                                    fontSize: '12px',
+                                    textAlign: 'center',
+                                }}
+                            >
+                                &times;
+                            </button>
+                        </div>
+                    ))}
+                </div>
             </div><br />
+
             <button className="back-button" type="button" onClick={() => navigate('/mystore')}>
                     이전
             </button>

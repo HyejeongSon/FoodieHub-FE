@@ -512,44 +512,7 @@ export async function getProfile(method, url, body = null) {
 //     }
 // }
 
-
-
-
 // 쿠키 가져오는 함수
-
-export async function postStoreSave(method, url, body) {
-    const options = {
-        method,
-        credentials: 'include', // 쿠키 기반 인증
-        body, // FormData 전달
-    };
-
-    try {
-        console.log(`HTTP 요청: ${method} ${url}`);
-        for (let [key, value] of body.entries()) {
-            console.log(`${key}: ${value}`);
-        }
-
-        const response = await fetch(url, options);
-
-        console.log(`HTTP 응답 상태: ${response.status}`);
-        if (response.ok) {
-            return await response.json();
-        }
-
-        const errorData = await response.json();
-        console.error(`HTTP 요청 실패: ${response.status}`, errorData);
-        throw { status: response.status, response: errorData };
-    } catch (error) {
-        console.error('HTTP 요청 중 오류 발생:', error);
-        throw error;
-    }
-}
-
-
-
-
-
 function getCookie(key) {
     const cookies = document.cookie.split(';');
     for (let cookie of cookies) {

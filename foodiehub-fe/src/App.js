@@ -14,6 +14,7 @@ import EditProfile from "./routes/mypage/EditProfile"
 import ReviewEdit from "./routes/mypage/ReviewEdit";
 import MyStore from "./routes/mystore/MyStore";
 import StoreRegister from "./routes/mystore/StoreRegister";
+import EditMyStore from "./routes/mystore/EditMyStore";
 
 function App() {
     return (
@@ -32,7 +33,7 @@ function App() {
                     <Route path="/mypage" element={<MyPage />} />
                     <Route path="/mypage/edit" element={<EditProfile />} />
                     <Route path="/mystore" element={<MyStore />} />
-
+                    <Route path="/mystore/edit" element={<EditMyStore />} />
                     <Route path="/mypage/reviewedit" element={<ReviewEdit />} />
                 </Routes>
            </UserProvider>
