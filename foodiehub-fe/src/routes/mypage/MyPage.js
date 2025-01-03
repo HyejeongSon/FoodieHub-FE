@@ -154,7 +154,7 @@ const MyPage = () => {
                                         </div>
                                         <div className="review-rating">
                                             <span className="rating-text">내 점수: {review.avgRating} / 5</span>
-                                            <StarRating voteAverage={review.avgRating} />
+                                            <StarRating voteAverage={review.avgRating} uniqueId={review.id}/>
                                         </div>
                                     </div>
                                     <div className="review-content">{review.content}</div>
