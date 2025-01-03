@@ -21,7 +21,7 @@ function Main() {
       const items = [
         {
           title: "갈비찜",
-          rating: 4.5,
+          rating: 1.4,
           intro: "다채로운 양념이 어우러진 최고 요리",
           image: "/img/img_3.jpg",
         },

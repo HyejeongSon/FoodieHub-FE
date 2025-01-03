@@ -1,4 +1,18 @@
+.detail-container {
+  display: flex;
+  justify-content: center; /* 가운데 정렬 */
+  padding: 20px;
+  background-color: #f9f9f9; /* 배경색 */
+}
+
 .store-detail {
+  width: 100%;
+  max-width: 1000px; /* 최대 너비 */
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 20px;
   font-family: Arial, sans-serif;
   line-height: 1.5;
 }
@@ -7,50 +21,159 @@
   width: 100%;
   height: 200px;
   object-fit: cover;
+  border-radius: 10px;
 }
 
 .info-section {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 50%; /* 너비를 현재 가용 너비의 50%로 설정 */
+  margin: 0 auto; /* 가운데 정렬 (가로) */
+  margin-left: 0; /* 왼쪽 정렬 */
 }
 
-.map-section {
+.info-header {
+  display: flex;
+  justify-content: space-between; /* 양쪽 정렬 */
+  align-items: center; /* 수직 가운데 정렬 */
+  width: 100%;
+  margin-bottom: 10px; /* 아래 여백 */
+}
+
+.store-name {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: left; /* 음식점 이름 왼쪽 정렬 */
+  margin: 0; /* 마진 제거 */
+}
+
+.rating-section {
+  display: flex; /* 가로 배열 */
+  align-items: center; /* 수직 가운데 정렬 */
+  gap: 5px; /* 별점과 점수 사이 간격 */
+}
+
+.star-rating {
+  display: inline-block; /* 별점 아이콘 */
+}
+
+.rating-text {
+  font-size: 16px;
+  color: #333;
+  margin-left: 5px; /* 별점과 점수 사이 여백 */
+  text-align: left; /* 점수 왼쪽 정렬 */
+}
+
+.info-details p,
+.additional-info p {
+  margin-bottom: 10px; /* 아래쪽으로 10px의 여백 */
+}
+
+.map-section button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
   margin-top: 10px;
+}
+
+.map-section button:hover {
+  background-color: #0056b3;
 }
 
 .description-section {
   padding: 20px;
+  border-top: 1px solid #ddd;
+  margin-top: 20px;
 }
 
-table {
+.store-intro {
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.intro-section {
+  margin-bottom: 50px;
+}
+
+
+.menu-container {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-
-table th,
-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-.reviews-section {
   padding: 20px;
 }
 
+.menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px dashed #ccc;
+}
+
+.menu-name {
+  font-weight: 500;
+}
+
+.menu-price {
+  font-weight: 500;
+  color: #333;
+}
+
+.menu-toggle-btn {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 14px;
+  float: right; /* 버튼을 오른쪽으로 떠 있도록 설정 */
+}
+
+.menu-toggle-btn:hover {
+  text-decoration: underline;
+}
+.reviews-section {
+  padding: 20px;
+  border-top: 1px solid #ddd;
+  margin-top: 20px;
+}
+
 .review {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review p {
+  margin: 5px 0;
 }
 
 .footer-section {
   text-align: center;
-  margin: 20px 0;
+  margin-top: 20px;
 }
 
 .footer-section button {
   padding: 10px 20px;
   background-color: #28a745;
-  color: #fff;
+  color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.footer-section button:hover {
+  background-color: #218838;
 }

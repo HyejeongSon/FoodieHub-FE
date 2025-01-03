@@ -13,7 +13,7 @@ import SignUpAdmin from "./routes/signupadmin/SignUpAdmin";
 import EditProfile from "./routes/mypage/EditProfile"
 import ReviewEdit from "./routes/mypage/ReviewEdit";
 import MyStore from "./routes/mystore/MyStore";
-
+import StoreDetail from "./routes/storedetail/StoreDetail";
 
 
 function App() {
@@ -32,8 +32,8 @@ function App() {
                     <Route path="/mypage" element={<MyPage />} />
                     <Route path="/mypage/edit" element={<EditProfile />} />
                     <Route path="/mystore" element={<MyStore />} />
-
                     <Route path="/mypage/reviewedit/:reviewId" element={<ReviewEdit />} />
+                    <Route path="/storedetail" element={<StoreDetail />} />
                 </Routes>
            </UserProvider>
         </Router>
