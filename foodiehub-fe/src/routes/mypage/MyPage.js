@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchUserReviews, downloadReviewImage } from "../../store/ReviewStore";
 import { useUser } from "../../contexts/UserContext";
 import "../../styles/MyPage.css";
-import StarRating from "./StarRating";
+import StarRating from "./StarRatingMyReviews";
 
 const MyPage = () => {
     const navigate = useNavigate();
