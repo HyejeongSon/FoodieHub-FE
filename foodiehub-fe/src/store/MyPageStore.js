@@ -1,3 +1,30 @@
+export async function fetchStoreLikes() {
+    console.log("fetchStoreLikes 호출");
+    const url = "/api/store/like";
+    return await httpRequest("GET", url);
+}
+
+export async function fetchStoreFavorites() {
+    console.log("fetchStoreFavorites 호출");
+    const url = "/api/store/favorite"; // 북마크 API URL
+    return await httpRequest("GET", url);
+}
+
+export async function fetchRemoveStoreLike(storeId) {
+    const url = `/api/store/${storeId}/like`;
+    return await httpRequest("DELETE", url);
+}
+
+export async function fetchRemoveStoreFavorite(storeId) {
+    const url = `/api/store/${storeId}/favorite`;
+    return await httpRequest("DELETE", url);
+}
+
+export async function fetchDeleteReview(reviewId) {
+    const url = `/api/review/${reviewId}`;
+    return await httpRequest("DELETE", url);
+}
+
 export async function fetchUserReviews() {
     console.log("fetchUserReviews호출");
     const url = "/api/review/user";

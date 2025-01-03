@@ -1,5 +1,6 @@
 import React from "react";
 
+//  voteAverage, uniqueId -> props로 추후에 변경
 function StarRating({ voteAverage, uniqueId }) {
   console.log("Rendering StarRating with voteAverage:", voteAverage);
   const AVR_RATE = Math.round(voteAverage * 10) / 10; // 소수점 한 자리로 반올림 (5점 만점)

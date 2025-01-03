@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../../styles/ReviewEdit.css";
-import { downloadReviewImage } from "../../store/ReviewStore";
+import { downloadReviewImage } from "../../store/MyPageStore";
 
 const StarRating = ({ voteAverage = 0, onRate }) => {
   const [hoveredRating, setHoveredRating] = useState(null);
