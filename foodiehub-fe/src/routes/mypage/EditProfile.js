@@ -292,7 +292,7 @@ const EditProfile = () => {
                         onChange={handleChange}
                     />
                 </div>
-                { user?.provider =="local" &&
+                { user?.provider === "local" &&
                 <div>
                     <label>현재 비밀번호</label>
                     <input
@@ -303,7 +303,7 @@ const EditProfile = () => {
                     />
                 </div>
                 }
-                { user?.provider =="local" &&
+                { user?.provider === "local" &&
                 <div>
                     <label>새 비밀번호</label>
                     <input

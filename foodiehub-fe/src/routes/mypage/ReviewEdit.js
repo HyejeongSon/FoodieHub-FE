@@ -11,7 +11,7 @@ const StarRating = ({ voteAverage = 0, onRate }) => {
       onRate(value); // 선택한 별점을 상위 컴포넌트로 전달
     }
   };
-
+  
   return (
     <div className="star-rating">
       {[1, 2, 3, 4, 5].map((star) => (
@@ -60,21 +60,19 @@ const ReviewEdit = () => {
     if (file) {
       setReview((prev) => ({
         ...prev,
-        image: URL.createObjectURL(file), // 미리보기 URL 생성
+        image: URL.createObjectURL(file),
       }));
     }
   };
 
   const handleSubmit = () => {
     console.log("Updated Review:", review);
-    // 서버로 수정된 리뷰 데이터 전송 로직 추가
-    navigate("/mypage");
-  };
-  
-  const handleCancel = () => {
     navigate("/mypage");
   };
 
+  const handleCancel = () => {
+    navigate("/mypage");
+  };
   return (
     <div className="review-edit-container">
       <h2>리뷰 수정</h2>
