@@ -4,6 +4,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../styles/Carousel.css";
 import { useNavigate } from "react-router-dom";
+import CategoryEnum from "./CategoryEnum.js";
+import axios from "axios";
 import StarRating from "../mypage/StarRating";
 
 const CustomPrevArrow = ({ onClick }) => (
@@ -18,70 +20,80 @@ const CustomNextArrow = ({ onClick }) => (
   </button>
 );
 
-const Carousel = ({ items }) => {
+const Carousel = ({ items = [] }) => {
   const navigate = useNavigate();
-  const [selectedTags, setSelectedTags] = useState(["전체"]); // 기본 선택값 '전체'
-  const [visibleCarousels, setVisibleCarousels] = useState([
-    { tag: "전체", items }, // 기본값으로 '전체' 데이터 표시
-  ]);
+  const [selectedTags, setSelectedTags] = useState(["전체"]);
+  const [visibleCarousels, setVisibleCarousels] = useState([{ tag: "전체", items }]);
 
-  const tags = [
-    "전체",
-    "중식",
-    "일식",
-    "이태리",
-    "프렌치",
-    "아시안",
-    "멕시칸",
-    "기타",
-    "혼밥",
-    "모임",
-    "회식",
-    "데이트",
-    "감성",
-    "노포",
-    "부모님",
+  const categoryTags = Object.entries(CategoryEnum).map(([key, value]) => ({
+    key,
+    display: value,
+    type: "category",
+  }));
+
+  const generalTags = [
+    { key: "혼밥", display: "혼밥", type: "tag" },
+    { key: "모임", display: "모임", type: "tag" },
+    { key: "회식", display: "회식", type: "tag" },
+    { key: "데이트", display: "데이트", type: "tag" },
+    { key: "감성", display: "감성", type: "tag" },
+    { key: "노포", display: "노포", type: "tag" },
+    { key: "부모님", display: "부모님", type: "tag" },
   ];
 
-  const handleTagClick = (tag) => {
-    if (tag === "전체") {
-      // '전체' 클릭 시 모든 태그 초기화
+  const tags = [
+    { key: "전체", display: "전체", type: "all" },
+    ...categoryTags,
+    ...generalTags,
+  ];
+
+  const fetchItemsByCategoryOrTag = async (tag) => {
+    try {
+      const selectedTag = tags.find((t) => t.key === tag);
+      if (!selectedTag) return;
+
+      const apiEndpoint =
+        selectedTag.type === "category"
+          ? `/api/store/category/${selectedTag.key}`
+          : `/api/store/tag/${selectedTag.key}`;
+
+      const response = await axios.get(apiEndpoint, { params: { limit: 5 } });
+      const newItems = response?.data || [];
+
+      setVisibleCarousels((prev) => [
+        ...prev.filter((carousel) => carousel.tag !== selectedTag.key),
+        { tag: selectedTag.key, items: newItems },
+      ]);
+    } catch (error) {
+      console.error("Error fetching items:", error);
+    }
+  };
+
+  const handleTagClick = (tagKey) => {
+    if (tagKey === "전체") {
       setSelectedTags(["전체"]);
       setVisibleCarousels([{ tag: "전체", items }]);
     } else {
-      const alreadySelected = selectedTags.includes(tag);
+      const alreadySelected = selectedTags.includes(tagKey);
       const updatedTags = alreadySelected
-        ? selectedTags.filter((t) => t !== tag) // 이미 선택된 태그를 제거
-        : [...selectedTags.filter((t) => t !== "전체"), tag]; // '전체' 제거 후 추가
+        ? selectedTags.filter((t) => t !== tagKey)
+        : [...selectedTags.filter((t) => t !== "전체"), tagKey];
 
       setSelectedTags(updatedTags);
 
       if (!alreadySelected) {
-        const filteredItems = items.filter((item) => item.tag === tag);
-        setVisibleCarousels((prev) => [
-          ...prev,
-          { tag, items: filteredItems },
-        ]);
+        fetchItemsByCategoryOrTag(tagKey);
       } else {
         setVisibleCarousels((prev) =>
-          prev.filter((carousel) => carousel.tag !== tag)
+          prev.filter((carousel) => carousel.tag !== tagKey)
         );
       }
     }
   };
 
-  const handleDetailButtonClick = (tag) => {
-    navigate(`/list/${tag}`); // 해당 태그의 리스트 페이지로 이동
-  };
-
-  const handleDetailStoreButtonClick = (tag) => {
-    navigate(`/storedetail`); // 해당 태그의 리스트 페이지로 이동
-  };
-
-
-  const settings = {
+  const getSettings = (carouselItems) => ({
     dots: false,
-    infinite: true,
+    infinite: carouselItems.length >= 3,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -91,18 +103,26 @@ const Carousel = ({ items }) => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: Math.min(2, carouselItems.length),
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: Math.min(1, carouselItems.length),
           slidesToScroll: 1,
         },
       },
     ],
+  });
+
+  const handleDetailButtonClick = (tag) => {
+    navigate(`/list/${tag}`); // 해당 태그의 리스트 페이지로 이동
+  };
+
+  const handleDetailStoreButtonClick = (tag) => {
+    navigate(`/storedetail`); // 해당 태그의 리스트 페이지로 이동
   };
 
   const truncateText = (text, limit) => {
@@ -110,27 +130,38 @@ const Carousel = ({ items }) => {
     return text.length > limit ? text.substring(0, limit) + "..." : text;
   };
 
+  const adjustCarouselItems = (carouselItems) => {
+    const emptySlots = 3 - carouselItems.length; // 3개에 맞추기 위한 빈 슬롯 계산
+    if (emptySlots > 0) {
+      return [
+        ...carouselItems,
+        ...Array(emptySlots).fill({ isPlaceholder: true }), // 빈 객체로 채움
+      ];
+    }
+    return carouselItems;
+  };
+
   return (
     <div>
-      {/* 태그 버튼 컨테이너 */}
       <div className="tag-buttons">
         {tags.map((tag, index) => (
           <button
             key={index}
-            className={`tag-button ${selectedTags.includes(tag) ? "active" : ""}`}
-            onClick={() => handleTagClick(tag)}
+            className={`tag-button ${selectedTags.includes(tag.key) ? "active" : ""}`}
+            onClick={() => handleTagClick(tag.key)}
           >
-            #{tag}
+            #{tag.display}
           </button>
         ))}
       </div>
 
-      {/* 동적으로 추가된 캐러셀 */}
       <div className="carousel-section">
         {visibleCarousels.map((carousel, index) => (
           <div key={index} className="carousel-container">
             <div className="tag-detail">
-              <h3 className="tag-btn">#{carousel.tag}</h3>
+              <h3 className="tag-btn">
+                #{tags.find((tag) => tag.key === carousel.tag)?.display || carousel.tag}
+              </h3>
               <button
                 className="detail-btn"
                 onClick={() => handleDetailButtonClick(carousel.tag)}
@@ -138,36 +169,44 @@ const Carousel = ({ items }) => {
                 자세히보기
               </button>
             </div>
-            <Slider {...settings}>
-              {carousel.items.map((item, idx) => (
-                <div key={idx} className="card">
-                  <img
-                    src={item.image || "/placeholder.png"}
-                    alt={item.title}
-                    className="card-image"
-                  />
-                  <div className="card-header">
-                    <div className="card-title-rating">
-                      <h3 className="card-title">{item.title}</h3>
-                      <div className="card-rating"><StarRating key={item.title || idx} id={item.title || idx} num={item.rating}/> {item.rating} / 5</div>
-                    </div>
-                    <p className="card-intro">{item.intro}</p>
-                  </div>
-                  <p className="card-description">
-                    {truncateText(item.description, 50)}
-                  </p>
-                  <button 
-                  className="card-button"
-                  onClick={() => handleDetailStoreButtonClick()}
-                  >상세 보기</button>
+            <Slider key={carousel.tag} {...getSettings(carousel.items)}>
+              {adjustCarouselItems(carousel.items).map((item, idx) => (
+                <div
+                  key={idx}
+                  className={item.isPlaceholder ? "card placeholder" : "card"}
+                >
+                  {!item.isPlaceholder ? (
+                    <>
+                      <img
+                        src={
+                          item.image
+                            ? `/api/store/image/${item.image}`
+                            : "/img/placeholder.png"
+                        }
+                        alt={item.name || "이미지 준비 중"}
+                        className="card-image"
+                      />
+                      <div className="card-header">
+                        <div className="card-title-rating">
+                          <h3 className="card-title">{item.name}</h3>
+                          <div className="card-rating"><StarRating key={item.id} id={item.id} num={item.avgRating}/> {item.avgRating} / 5</div>
+                        </div>
+                        <p className="card-intro">{item.intro}</p>
+                      </div>
+                      <p className="card-description">{truncateText(item.content, 50)}</p>
+                      <button
+                        className="card-button"
+                        onClick={() => handleDetailStoreButtonClick()}
+                      >
+                        상세 보기
+                      </button>
+                    </>
+                  ) : null}
                 </div>
               ))}
             </Slider>
           </div>
         ))}
-      </div>
-      <div>
-        
       </div>
     </div>
   );
