@@ -9,11 +9,18 @@ import MenuList from "../../routes/storedetail/AllMenu";
 import Review from "../../routes/storedetail/Review";
 import ReviewList from "../../routes/storedetail/ReviewList";
 import MapComponent from "../../components/MapComponent";
-import { fetchStoreDetail } from "../../store/StoreDetailStore";
+import { useUser } from "../../contexts/UserContext";
+import { fetchStoreDetail, toggleStoreLike, toggleStoreFavorite } from "../../store/StoreDetailStore";
 
 const StoreDetail = () => {
   const { storeId } = useParams();
+  const { user } = useUser();
+  const isLoggedIn = !!user.nickname; // 로그인 여부 확인
   const [storeDetail, setStoreDetail] = useState(null); // 스토어 상세 정보 상태
+  const [likes, setLikes] = useState(0); // 좋아요 개수
+  const [isLiked, setIsLiked] = useState(false); // 좋아요 여부
+  const [favorites, setFavorites] = useState(0); // 북마크 개수
+  const [isFavorite, setIsFavorite] = useState(false); // 북마크 여부
   const [error, setError] = useState(null); // 에러 상태
   const [loading, setLoading] = useState(true); // 로딩 상태
 
@@ -23,6 +30,10 @@ const StoreDetail = () => {
             setLoading(true); // 로딩 시작
             const data = await fetchStoreDetail(storeId); // API 호출
             setStoreDetail(data); // 데이터 저장
+            setLikes(data.likes); // 좋아요 개수 저장
+            setIsLiked(data.isLiked); // 좋아요 여부 저장
+            setFavorites(data.favorites); // 북마크 개수 저장
+            setIsFavorite(data.isFavorite); // 북마크 여부 저장
         } catch (err) {
             setError(err.response?.message || "스토어 정보를 가져오는 중 오류가 발생했습니다."); // 에러 처리
         } finally {
@@ -48,11 +59,42 @@ const getSettings = (images) => ({
   autoplaySpeed: 2500,
 });
 
+// 좋아요 토글 핸들러
+const handleLikeToggle = async () => {
+  if (!isLoggedIn) {
+    alert("로그인이 필요합니다.");
+    return;
+  }
+  try {
+      const response = await toggleStoreLike(storeId);
+      setLikes(response.likeCount); // 좋아요 개수 업데이트
+      setIsLiked(response.liked); // 좋아요 여부 업데이트
+  } catch (error) {
+      console.error("좋아요 토글 실패:", error);
+  }
+};
+
+// 북마크 토글 핸들러
+const handleFavoriteToggle = async () => {
+  if (!isLoggedIn) {
+    alert("로그인이 필요합니다.");
+    return;
+  }
+  try {
+      const response = await toggleStoreFavorite(storeId);
+      setFavorites(response.favoriteCount); // 북마크 개수 업데이트
+      setIsFavorite(response.favorited); // 북마크 여부 업데이트
+  } catch (error) {
+      console.error("북마크 토글 실패:", error);
+  }
+};
+
   const spanRef = useRef(null);
 
   const handleClick = () => {
     alert(spanRef.current.innerText);
   }
+
   // 리뷰리스트 가데이터
   const review = [
     {
@@ -142,6 +184,18 @@ const getSettings = (images) => ({
               <div className="rating-section">
                 <div className="star-rating"><StarRating key={storeDetail.id} id={storeDetail.id} num={storeDetail.avgRating}/></div>
                 <span className="rating-text">{storeDetail.avgRating} / 5</span>
+
+                {/* 좋아요 섹션 */}
+                <div className="like-section" onClick={handleLikeToggle} style={{ cursor: "pointer" }}>
+                  <img src={isLiked ? "/img/like.png" : "/img/unlike.png"} alt="좋아요" className="icon" />
+                  <span className="like-count">{likes}</span>
+                </div>
+
+                {/* 북마크 섹션 */}
+                <div className="bookmark-section" onClick={handleFavoriteToggle} style={{ cursor: "pointer" }}>
+                  <img src={isFavorite ? "/img/favorite.png" : "/img/unfavorite.png"} alt="북마크" className="icon" />
+                  <span className="bookmark-count">{favorites}</span>
+                </div>
               </div>
             </div>
             <div className="info-intro">{storeDetail.intro}</div>

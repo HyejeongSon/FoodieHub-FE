@@ -83,7 +83,7 @@ const Header = () => {
             <div className="logo-wrapper">
                 <img
                     src="/img/foodieHub.png"
-                    alt="foodieHub" width={277} height={195} style={{ margin: '20px auto 0' }}
+                    alt="foodieHub" width={277} height={195} style={{ margin: '20px auto 0', cursor: 'pointer' }}
                     className="logo"
                     onClick={() => handleNavigate("/main")}
                 /></div>

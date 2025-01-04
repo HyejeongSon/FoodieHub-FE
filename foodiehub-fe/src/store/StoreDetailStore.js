@@ -3,6 +3,16 @@ export async function fetchStoreDetail(storeId) {
     return await httpRequest("GET", url);
 }
 
+export async function toggleStoreLike(storeId) {
+    const url = `/api/store/like/${storeId}`;
+    return await httpRequest("POST", url);
+}
+
+export async function toggleStoreFavorite(storeId) {
+    const url = `/api/store/favorite/${storeId}`;
+    return await httpRequest("POST", url);
+}
+
 async function httpRequest(method, url, body = null) {
     const headers = {
         'Content-Type': 'application/json',
