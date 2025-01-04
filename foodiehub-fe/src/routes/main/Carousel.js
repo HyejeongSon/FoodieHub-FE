@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -52,10 +52,12 @@ const Carousel = ({ items = [] }) => {
       const selectedTag = tags.find((t) => t.key === tag);
       if (!selectedTag) return;
 
-      const apiEndpoint =
+      const apiEndpoint = 
         selectedTag.type === "category"
           ? `/api/store/category/${selectedTag.key}`
-          : `/api/store/tag/${selectedTag.key}`;
+          : selectedTag.type === "tag"
+          ? `/api/store/tag/${selectedTag.key}`
+          : `/api/store/all`;
 
       const response = await axios.get(apiEndpoint, { params: { limit: 5 } });
       const newItems = response?.data || [];
@@ -69,10 +71,16 @@ const Carousel = ({ items = [] }) => {
     }
   };
 
+  // 최초 렌더링 시 "전체" 데이터 로드
+  useEffect(() => {
+    fetchItemsByCategoryOrTag("전체");
+  }, []); // 빈 배열로 설정하여 컴포넌트가 처음 렌더링될 때만 실행
+
+
   const handleTagClick = (tagKey) => {
     if (tagKey === "전체") {
       setSelectedTags(["전체"]);
-      setVisibleCarousels([{ tag: "전체", items }]);
+      fetchItemsByCategoryOrTag("전체");
     } else {
       const alreadySelected = selectedTags.includes(tagKey);
       const updatedTags = alreadySelected
