@@ -21,7 +21,6 @@ const MenuList = () => {
 
   return (
     <div className="menu-container">
-      <h3>메뉴</h3>
       <ul className="menu-list">
         {visibleMenus.map((menu, index) => (
           <li key={index} className="menu-item">

@@ -1,0 +1,139 @@
+/* 리뷰 섹션 컨테이너 */
+.reviews-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+/* 리뷰 리스트 */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 한 행에 2개 */
+  gap: 20px;
+}
+
+.review-card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 리뷰 헤더 */
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+}
+
+.profile-image {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%; /* 원형으로 만들기 */
+  object-fit: cover;
+  margin-right: 15px;
+  border: 1px solid #ccc;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-name {
+  font-weight: bold;
+  margin: 0;
+}
+
+.review-date {
+  font-size: 12px;
+  color: #666;
+  margin: 5px 0 0;
+}
+
+/* 별점 */
+
+.allrating-section {
+  font-size: 16px;
+  color: #333;
+  text-align: right;
+  cursor: pointer;
+  position: relative; /* 세부 평점 위치를 조정 */
+}
+
+.detailed-rating {
+  display: flex;
+  flex-direction: row; /* 가로 방향으로 배치 */
+  justify-content: center; /* 가로 중앙 정렬 */
+  gap: 15px; /* 항목 간 간격 */
+  font-size: 14px;
+  font-weight: 700;
+  color: #444;
+  margin-top: 10px;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #4f4f4f;
+  position: absolute; /* 별도의 레이어로 출력 */
+  right: 0;
+  top: 40px;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+  width: 400px; /* 가로 길이를 넓게 설정 */
+}
+
+
+/* 리뷰 내용과 이미지 */
+.review-content-section {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  max-width: 100%;
+}
+
+.review-content {
+  flex: 2;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.review-image {
+  flex: 1;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+/* 리뷰 푸터 */
+.review-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.review-likes {
+  font-size: 12px;
+  color: #888;
+}
+
+
+
+
+
+
+
+
+

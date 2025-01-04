@@ -21,12 +21,11 @@
   margin-top: 10px;
   padding: 8px 12px;
   background-color: transparent;
-  border: none;
   color: #007bff;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 500;
   float: right; /* 버튼을 오른쪽으로 떠 있도록 설정 */
-  font-size: 14px;
 }
 
 .write-review-btn:hover {
@@ -36,17 +35,66 @@
 /* 리뷰 작성란 */
 .review-form {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* 세로 정렬 */
+  gap: 10px; /* 상하 간격 조정 */
   margin-bottom: 20px;
 }
 
-.review-form textarea {
-  width: 100%;
-  height: 100px;
+.review-form h3 {
+  text-align: center;
+  margin-bottom: 10px; /* 필요시 추가 */
+}
+
+.rating-item {
+  display: flex; /* 질문과 별을 가로로 배치 */
+  justify-content: space-between; /* 양쪽 정렬 */
+  align-items: center; /* 세로 정렬 */
+}
+
+.rating-item p {
+  margin: 0;
+  font-size: 16px; /* 질문 텍스트 크기 */
+  flex: 1; /* 질문 텍스트가 공간을 유동적으로 차지 */
+  text-align: left; /* 질문 텍스트 왼쪽 정렬 */
+  padding-right: 10px; /* 별과 텍스트 사이 간격 추가 */
+  text-align: center;
+}
+
+.rating-item .star-rating {
+  display: flex; /* 별을 가로로 나열 */
+  gap: 5px; /* 별 간 간격 */
+  flex-shrink: 0; /* 별 크기 고정 */
+  padding-right: 25%;
+}
+
+.text-area-section {
+  display: flex; /* Flexbox 활성화 */
+  flex-direction: row; /* 가로 배치 */
+  align-items: flex-start; /* 상단 정렬 */
+  gap: 20px; /* 이미지와 텍스트 사이 간격 */
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.image-section {
+  max-width: 200px; /* 이미지 영역의 최대 너비 */
+  flex-shrink: 0; /* 이미지 크기 고정 */
+}
+
+.image-upload-label img {
+  width: 100%; /* 이미지가 영역에 맞게 */
+  border: 1px solid #ccc; /* 이미지 테두리 */
+  border-radius: 5px; /* 이미지 테두리 둥글게 */
+  display: block;
+}
+
+textarea {
+  flex-grow: 1; /* 텍스트 영역이 남은 공간을 차지하도록 설정 */
+  height: 150px;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
-  margin-bottom: 10px;
+  font-size: 14px;
 }
 
 .submit-review-btn {
@@ -60,71 +108,5 @@
 }
 
 .submit-review-btn:hover {
-  background-color: #218838;
-}
-
-/* 리뷰 리스트 */
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 한 행에 2개 */
-  gap: 20px;
-}
-
-.review-card {
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.review-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.review-name {
-  font-weight: bold;
-}
-
-.review-date {
-  font-size: 12px;
-  color: #666;
-}
-
-.review-rating {
-  font-size: 14px;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.review-content {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 10px;
-}
-
-.review-likes {
-  font-size: 12px;
-  color: #888;
-}
-
-/* 리뷰 더보기 버튼 */
-.reviews-footer {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.load-more-btn {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-.load-more-btn:hover {
   background-color: #218838;
 }

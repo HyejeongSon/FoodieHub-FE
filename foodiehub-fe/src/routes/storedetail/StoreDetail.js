@@ -6,6 +6,9 @@ import "../../styles/StoreDetail.css";
 import StarRating from "../mypage/StarRating";
 import AllMenu from "../../routes/storedetail/AllMenu";
 import Review from "../../routes/storedetail/Review";
+import ReviewList from "../../routes/storedetail/ReviewList";
+import MapComponent from "../../components/MapComponent";
+
 
 const StoreDetail = () => {
   const settings = {
@@ -14,13 +17,74 @@ const StoreDetail = () => {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2500,
   };
 
-  const reviews = [
-    { name: "닉네임1", date: "2023-12-31", rating: 4.5, likes: 3 },
-    { name: "닉네임2", date: "2023-12-30", rating: 5, likes: 2 },
-    { name: "닉네임3", date: "2023-12-29", rating: 3.5, likes: 4 },
+  // 리뷰리스트 가데이터
+  const review = [
+    {
+      profileImage: "/img/profile1.png",
+      name: "닉네임1",
+      date: "2024-01-01",
+      rating: 4.5,
+      details: {
+        taste: 4.7,
+        price: 4.5,
+        hygiene: 4.8,
+        service: 4.6,
+      },
+      content: "리뷰 내용 1 리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1",
+      likes: 3,
+      image: "/img/review1.png",
+    },
+    {
+      profileImage: "/img/profile2.png",
+      name: "닉네임2",
+      date: "2024-01-02",
+      rating: 4.0,
+      details: {
+        taste: 4.0,
+        price: 4.2,
+        hygiene: 4.1,
+        service: 4.3,
+      },
+      content: "리뷰 내용 2",
+      likes: 5,
+      image: "/img/review2.png",
+    },
+    {
+      profileImage: "/img/profile1.png",
+      name: "닉네임3",
+      date: "2024-01-03",
+      rating: 4.5,
+      details: {
+        taste: 4.7,
+        price: 4.5,
+        hygiene: 4.8,
+        service: 4.6,
+      },
+      content: "리뷰 내용 3",
+      likes: 3,
+      image: "/img/review1.png",
+    },
+    {
+      profileImage: "/img/profile2.png",
+      name: "닉네임4",
+      date: "2024-01-04",
+      rating: 4.0,
+      details: {
+        taste: 4.0,
+        price: 4.2,
+        hygiene: 4.1,
+        service: 4.3,
+      },
+      content: "리뷰 내용 4",
+      likes: 5,
+      image: "/img/review2.png",
+    },
   ];
+
 
   return (
     <div className="detail-container">
@@ -30,61 +94,87 @@ const StoreDetail = () => {
         <Slider {...settings}>
           <img src="/img/img_3.jpg" alt="이미지1" />
           <img src="/img/img_3.jpg" alt="이미지2" />
-          <img src="/img/img_3.jpg" alt="이미지3" />
+          <img src="/img/img2.jpg" alt="이미지3" />
         </Slider>
       </div>
 
-      {/* Info Section */}
-      <div className="info-section">
-        {/* 음식점 이름과 별점 */}
-        <div class="info-header">
-          <h1 class="store-name">음식점 이름</h1>
-            <div class="rating-section">
-              <StarRating num={4.1} /> 
-            <span className="rating-text">4.1 / 5</span>
+     {/* Info Section */}
+     <div className="info-section">
+          {/* 왼쪽 정보 */}
+          <div className="info-left">
+            <div className="info-header">
+              <h1 className="store-name">파블라</h1>
+              <div className="rating-section">
+                <div className="star-rating"><StarRating /></div>
+                <span className="rating-text">4.1 / 5</span>
+              </div>
+            </div>
+            <div className="info-intro">간짜장과 짬뽕이 맛있는 식당입니다.</div>
+            <div className="info-details">
+              <p>
+                <strong>분류</strong>
+                <span>중식</span>
+              </p>
+              <p>
+                <strong>주소</strong>
+                <span>서울시 강남구 강남대로 37</span>
+              </p>
+            </div>
+            <div className="additional-info">
+              <div className="info-item">
+                <strong>전화번호</strong>
+                <span>02-987-1234</span>
+              </div>
+              <div className="info-item">
+                <strong>주차 가능 여부</strong>
+                <span>불가</span>
+              </div>
+              <div className="info-item">
+                <strong>영업시간</strong>
+                <span>12:00 ~ 23:00</span>
+              </div>
+              <div className="info-item">
+                <strong>라스트오더</strong>
+                <span>21:00</span>
+              </div>
+              <button className="info-tag-button">#태그</button>
+            </div>
+          </div>
+
+          {/* 오른쪽 지도 */}
+          <div className="info-right">
+            <div className="map-section">
+              <div className="map-placeholder">
+                <MapComponent />
+              </div>
+            </div>
+            <button className="navigate-button">길찾기</button>
           </div>
         </div>
 
-        {/* 분류와 주소 */}
-        <div className="info-details">
-          <p>분류: 중식</p>
-          <p>주소: 서울시 강남구 강남대로 37</p>
-        </div>
-
-        {/* 기타 정보 */}
-        <div className="additional-info">
-          <p>전화번호: 02-987-1234</p>
-          <p>주차 가능 여부: 불가</p>
-          <p>영업시간: 12:00 ~ 23:00</p>
-        </div>
-        
-        {/* 지도 API가 들어갈 영역 */}
-        <div className="map-section">     
-          <div id="map" className="map"></div>
-        </div>
-        <div className="map-section">
-          <button>길찾기</button>
-        </div>
-      </div>
 
       {/* Description Section */}
       <div className="description-section">
         <div className="intro-section">
           <h2 className="store-intro">매장소개</h2>
-          <p>다양한 요리를 즐길 수 있는 매장입니다...다양한 요리를 즐길 수 있는 매장입니다...다양한 요리를 즐길 수 있는 매장입니다...다양한 요리를 즐길 수 있는 매장입니다...다양한 요리를 즐길 수 있는 매장입니다...다양한 요리를 즐길 수 있는 매장입니다...다양한 요리를 즐길 수 있는 매장입니다...다양한 요리를 즐길 수 있는 매장입니다...다양한 요리를 즐길 수 있는 매장입니다...다양한 요리를 즐길 수 있는 매장입니다...다양한 요리를 즐길 수 있는 매장입니다...다양한 요리를 즐길 수 있는 매장입니다...다양한 요리를 즐길 수 있는 매장입니다...다양한 요리를 즐길 수 있는 매장입니다...다양한 요리를 즐길 수 있는 매장입니다...다양한 요리를 즐길 수 있는 매장입니다...다양한 요리를 즐길 수 있는 매장입니다...다양한 요리를 즐길 수 있는 매장입니다...다양한 요리를 즐길 수 있는 매장입니다...</p>
+          <p>
+            다양한 요리를 즐길 수 있는 매장입니다... 다양한 요리를 즐길 수 있는
+            매장입니다...다양한 요리를 즐길 수 있는 매장입니다... 다양한 요리를 즐길 수 있는
+            매장입니다...다양한 요리를 즐길 수 있는 매장입니다... 다양한 요리를 즐길 수 있는
+            매장입니다...다양한 요리를 즐길 수 있는 매장입니다... 다양한 요리를 즐길 수 있는
+            매장입니다...
+          </p>
         </div>
         <h3>메뉴</h3>
-          <AllMenu />
+        <AllMenu />
       </div>
 
-      {/* Reviews Section */}
-      <div className="reviews-section">
-        <Review />
+     {/* Reviews Section */}
+     <div className="reviews-section">
+          <Review />
+          <ReviewList reviews={review} />
+        </div>
       </div>
-      {/* Footer Section */}
-      <div className="footer-section">
-      </div>
-    </div>
     </div>
   );
 };

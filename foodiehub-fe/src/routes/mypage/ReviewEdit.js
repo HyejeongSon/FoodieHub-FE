@@ -207,7 +207,7 @@ const ReviewEdit = () => {
       <h2>리뷰 수정</h2>
       <div className="review-edit-form">
         <h3>이 가게를 평가해 주세요</h3>
-        <div className="rating-section">
+        <div className="Modify-rating-section">
           {ratingKeys.map(({ key, label }) => (
             <div key={key} className="rating-item">
               <span>{label}</span>
