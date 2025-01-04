@@ -41,7 +41,7 @@ const ReviewEdit = () => {
     content: "",
   });
   const [reviewImage, setReviewImage] = useState(null); // 서버 전송용 File 객체
-  const [previewImage, setPreviewImage] = useState("/img/default-image.png"); // 초기 미리보기 URL
+  const [previewImage, setPreviewImage] = useState("/img/add-image.png"); // 초기 미리보기 URL
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -69,11 +69,11 @@ const ReviewEdit = () => {
               setReviewImage(data.reviewImage); // 서버 전송용 상태 유지
             } catch (imageError) {
               console.error("이미지 다운로드 실패:", imageError);
-              setPreviewImage("/img/default-image.png");
+              setPreviewImage("/img/add-image.png");
               setReviewImage(null);
             }
           } else {
-            setPreviewImage("/img/default-image.png");
+            setPreviewImage("/img/add-image.png");
             setReviewImage(null);
           }
         } else {
@@ -133,7 +133,7 @@ const ReviewEdit = () => {
     if (previewImage) {
       URL.revokeObjectURL(previewImage);
     }
-    setPreviewImage("/img/default-image.png"); // 미리보기 URL을 기본 이미지로 초기화
+    setPreviewImage("/img/add-image.png"); // 미리보기 URL을 기본 이미지로 초기화
     setReviewImage(null); // 서버 전송용 상태를 초기화
   };
 
@@ -234,7 +234,7 @@ const ReviewEdit = () => {
               onChange={handleImageChange}
               style={{ display: "none" }}
             />
-            {previewImage !== "/img/default-image.png" && (
+            {previewImage !== "/img/add-image.png" && (
               <button
                 type="button"
                 onClick={handleDeleteImage}
