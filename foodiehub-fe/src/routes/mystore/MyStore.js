@@ -40,14 +40,24 @@ const MyStore = () =>{
     };
 
     return (
-        <div>
+        <div className="mystore-container">
             {myStoreDetails && !myStoreDetails.isStore && (
-                <h1
-                    className="underline-link"
-                    onClick={() => navigate("/store_register")}
-                >
-                    사장님 가게 등록
-                </h1>
+                <div className="register-container">
+                    <img
+                        src="/img/MyStoreAlert.png" // 여기에 이미지 경로 추가
+                        alt="등록 알림"
+                        className="register-image"
+                    />
+                    <h1
+                        // className="underline-link"
+                        className="store-register-text"
+                        onClick={() => navigate("/store_register")}
+                    >
+                        가게를 등록해주세요
+                    </h1>
+                </div>
+                
+                
             )}
 
             {myStoreDetails && myStoreDetails.isStore && (
