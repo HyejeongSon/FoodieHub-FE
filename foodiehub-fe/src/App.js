@@ -36,7 +36,7 @@ function App() {
                     <Route path="/mypage/edit" element={<EditProfile />} />
                     <Route path="/mystore" element={<MyStore />} />
                     <Route path="/mypage/reviewedit/:reviewId" element={<ReviewEdit />} />
-                    <Route path="/storedetail" element={<StoreDetail />} />
+                    <Route path="/store/detail/:storeId" element={<StoreDetail />} />
                     <Route path="/mystore/edit" element={<EditMyStore />} />
                     <Route path="/mypage/reviewedit" element={<ReviewEdit />} />
                 </Routes>

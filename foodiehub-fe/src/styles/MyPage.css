@@ -137,7 +137,7 @@ h2 {
   padding: 10px; /* 이름과 이미지 간격 */
   font-weight: bold; /* 이름 강조 */
   text-align: left; /* 이름 왼쪽 정렬 */
-  margin-right: 45%; /* 왼쪽으로 20px 이동 */
+  margin-right: 42%; /* 왼쪽으로 20px 이동 */
 }
 
 
@@ -145,7 +145,7 @@ h2 {
   display: flex; /* 가로 정렬 */
   flex-direction: row; /* 기본값: 가로 정렬 */
   gap: 10px; /* 요소 간 간격 */
-  width: 70%; /* 부모 컨테이너 너비 */
+  width: 80%; /* 부모 컨테이너 너비 */
   box-sizing: border-box;
   justify-content: center; /* 수평 방향 중앙 정렬 */
   align-items: center; /* 수직 방향 중앙 정렬 */
@@ -162,7 +162,7 @@ h2 {
 }
 
 .image-placeholder {
-  width: 25%; /* 고정된 너비 비율 */
+  width: 19%; /* 고정된 너비 비율 */
   height: 200px; /* 동일한 높이 */
   background-color: #f5f7fa; /* 연한 회색 */
   display: flex;
@@ -175,7 +175,7 @@ h2 {
 
 .content-section {
   position: relative; 
-  max-width: 450px; /* 텍스트 영역의 최대 너비 */
+  max-width: 42%; /* 텍스트 영역의 최대 너비 */
   flex: 40%; /* 남은 공간을 차지 */
   display: flex;
   flex-direction: column; /* 세로 정렬 */
