@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -8,6 +8,7 @@ import AllMenu from "../../routes/storedetail/AllMenu";
 import Review from "../../routes/storedetail/Review";
 import ReviewList from "../../routes/storedetail/ReviewList";
 import MapComponent from "../../components/MapComponent";
+
 
 
 const StoreDetail = () => {
@@ -20,7 +21,11 @@ const StoreDetail = () => {
     autoplay: true,
     autoplaySpeed: 2500,
   };
+  const spanRef = useRef(null);
 
+  const handleClick = () => {
+    alert(spanRef.current.innerText);
+  }
   // 리뷰리스트 가데이터
   const review = [
     {
@@ -117,7 +122,7 @@ const StoreDetail = () => {
               </p>
               <p>
                 <strong>주소</strong>
-                <span>서울시 강남구 강남대로 37</span>
+                <span ref={spanRef}>서울시 강남구 강남대로 37</span>
               </p>
             </div>
             <div className="additional-info">
@@ -145,10 +150,10 @@ const StoreDetail = () => {
           <div className="info-right">
             <div className="map-section">
               <div className="map-placeholder">
-                <MapComponent />
+                <MapComponent address={"강남대로 374"} name={"파불라"}/>
               </div>
             </div>
-            <button className="navigate-button">길찾기</button>
+            <button className="navigate-button" onClick={handleClick}>길찾기</button>
           </div>
         </div>
 
