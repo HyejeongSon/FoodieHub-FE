@@ -15,6 +15,8 @@ import ReviewEdit from "./routes/mypage/ReviewEdit";
 import MyStore from "./routes/mystore/MyStore";
 import StoreDetail from "./routes/storedetail/StoreDetail";
 
+import StoreRegister from "./routes/mystore/StoreRegister";
+import EditMyStore from "./routes/mystore/EditMyStore";
 
 function App() {
     return (
@@ -29,11 +31,14 @@ function App() {
                     <Route path="/login_admin" element={<LoginAdmin />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/signup_admin" element={<SignUpAdmin />} />
+                    <Route path="/store_register" element={<StoreRegister />} />
                     <Route path="/mypage" element={<MyPage />} />
                     <Route path="/mypage/edit" element={<EditProfile />} />
                     <Route path="/mystore" element={<MyStore />} />
                     <Route path="/mypage/reviewedit/:reviewId" element={<ReviewEdit />} />
                     <Route path="/storedetail" element={<StoreDetail />} />
+                    <Route path="/mystore/edit" element={<EditMyStore />} />
+                    <Route path="/mypage/reviewedit" element={<ReviewEdit />} />
                 </Routes>
            </UserProvider>
         </Router>

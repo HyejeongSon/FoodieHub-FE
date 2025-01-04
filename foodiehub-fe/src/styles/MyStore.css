@@ -1,0 +1,13 @@
+.underline-link {
+  display: inline-block; /* 텍스트 크기만큼 영역 제한 */
+  border-bottom: 2px solid black; /* 밑줄 설정 */
+  cursor: pointer; /* 클릭 가능 표시 */
+  text-align: center; /* 중앙 정렬 */
+  margin: 0 auto; /* 여백 자동 설정 */
+}
+
+
+.underline-link:hover {
+  color: #007bff; /* 호버 시 텍스트 색상 변경 */
+  border-bottom-color: #007bff; /* 호버 시 밑줄 색상 변경 */
+}
