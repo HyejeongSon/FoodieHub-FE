@@ -91,8 +91,8 @@ const SignUp = () => {
     };
     
     return (
-        <div className="admin-container">
-            <img src={logo} alt="푸디허브 로고" className="logoImage" />
+    <div className="admin-container">
+        <img src={logo} alt="푸디허브 로고" className="logoImage" />
         <div className="adminsignup-title">
             <p class="adminTitle">사장님 회원가입</p>
             <hr className="divider" />
