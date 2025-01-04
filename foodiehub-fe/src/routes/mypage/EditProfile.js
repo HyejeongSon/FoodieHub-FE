@@ -94,7 +94,7 @@ const EditProfile = () => {
             }
         } catch (error) {
             console.error("사용자 정보 가져오기 오류:", error);
-            alert("사용자 정보를 가져오는 중 문제가 발생했습니다.");
+            // alert("사용자 정보를 가져오는 중 문제가 발생했습니다.");
         } finally {
             setIsLoading(false);
         }
