@@ -118,6 +118,10 @@ const MyPage = () => {
         );
     };
 
+    const handleDetailStoreButtonClick = (storeId) => {
+        navigate(`/store/detail/${storeId}`); // 해당 태그의 리스트 페이지로 이동
+    };
+
     // 탭 렌더링 핸들러
     const handleTabClick = (tab) => {
         setActiveTab(tab);
@@ -131,8 +135,12 @@ const MyPage = () => {
                         {error && <p className="error-message">{error}</p>}
                         {storeLikes.length > 0 ? (
                             storeLikes.map((store) => (
-                                <div class="image-container">
-                                    <p class="restaurant-name">
+                                <div class="image-container" key={store.id}>
+                                    <p 
+                                        className="restaurant-name" 
+                                        onClick={() => handleDetailStoreButtonClick(store.id)}
+                                        style={{ cursor: "pointer" }}
+                                    >
                                         {store.name} | <span style={{ fontSize: "12px", color: "#888" }}>{store.category}</span>
                                     </p>
                                     <div className="likelistbox-container">
@@ -171,7 +179,11 @@ const MyPage = () => {
                         {storeFavorites.length > 0 ? (
                             storeFavorites.map((store) => (
                                 <div key={store.id} className="image-container">
-                                    <p className="restaurant-name">
+                                    <p 
+                                        className="restaurant-name" 
+                                        onClick={() => handleDetailStoreButtonClick(store.id)}
+                                        style={{ cursor: "pointer" }}
+                                    >
                                         {store.name} | <span style={{ fontSize: "12px", color: "#888" }}>{store.category}</span>
                                     </p>
                                     <div className="likelistbox-container">

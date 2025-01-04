@@ -129,8 +129,8 @@ const Carousel = ({ items = [] }) => {
     navigate(`/list/${tag}`); // 해당 태그의 리스트 페이지로 이동
   };
 
-  const handleDetailStoreButtonClick = (tag) => {
-    navigate(`/storedetail`); // 해당 태그의 리스트 페이지로 이동
+  const handleDetailStoreButtonClick = (storeId) => {
+    navigate(`/store/detail/${storeId}`); // 해당 태그의 리스트 페이지로 이동
   };
 
   const truncateText = (text, limit) => {
@@ -204,7 +204,7 @@ const Carousel = ({ items = [] }) => {
                       <p className="card-description">{truncateText(item.content, 50)}</p>
                       <button
                         className="card-button"
-                        onClick={() => handleDetailStoreButtonClick()}
+                        onClick={() => handleDetailStoreButtonClick(item.id)}
                       >
                         상세 보기
                       </button>
