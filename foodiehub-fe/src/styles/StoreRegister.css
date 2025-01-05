@@ -1,227 +1,395 @@
-    /* 가장 바깥 div */
-    .store-register-container {
-        display: flex;
-        flex-direction: column; /* 세로 정렬 */
-        align-items: center; /* 가로 가운데 정렬 */
-        justify-content: center; /* 세로 가운데 정렬 */
-        height: auto; /* 화면 전체 높이 */
-        /*background-color: #f9f9f9;  배경색 (선택 사항) */
-    }
+/* 전체 컨테이너 */
+.store-register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
 
-    /* 가게 정보 저장 */
-    .store-register-title{
-        text-align: center;
-        font-size: 28px;
-    }
+/* 제목 */
+/* 상단 제목 및 설명 */
+.store-register-header {
+  text-align: left; /* 왼쪽 정렬 */
+  margin-bottom: 20px;
+  width: 100%; /* 부모 요소의 전체 너비 */
+}
 
-    /* 가게 정보 저장 아래 굵은 선선  */
-    .divider {
-        border: none; /* 기본 테두리 제거 */
-        border-top: 3px solid #000000; /* 윗부분에 선 추가 */
-        margin: 20px 0; /* 위아래 간격 */
-        width: 100%; /* 로그인 버튼과 비슷한 너비 */
-        align-self: center; /* 중앙 정렬 */
-        margin-bottom: 8%;
-    }
+.store-register-title {
+  text-align: left; /* 왼쪽 정렬 */
+  font-size: 28px;
+  font-weight: bold;
+  color: #fd5e53;
+  margin: 0;
+}
 
-    /* 폼 */
-    .store-register-form{
-        display: flex;
-        flex-direction: column;
-        width: 600px; /* 너비를 고정값으로 설정 */
-        padding: 10px; /* 내부 여백 추가 */
-        margin: 0 auto; /* 중앙 정렬 */
-      }
+.store-register-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+  margin-top: 5px; /* 제목과 간격 추가 */
+}
 
-      /* 주차 가능 사이즈 조절 */
-      .form-group label {
-        /* display: inline-block;
-        margin-right: 10px;
-        font-size: 14px;  */
-        display: flex; /* 라벨과 체크박스를 가로 정렬 */
-        align-items: center; /* 세로 정렬 */
-        font-size: 14px; /* 텍스트 크기 */    
-        margin-right: 10px; /* 다음 요소와 간격 */
+/* 구분선 */
+.store-divider {
+  border: none;
+  border-top: 2px solid #eee;
+  width: 100%;
+  margin-bottom: 20px;
+}
 
-      }
-    
-       /* 주차 가능 사이즈 조절 */
-      .form-group input[type="radio"] {
-        width: 16px; /* 라디오 버튼 크기 축소 */
-        height: 16px;
-        margin-right: 5px; /* 라벨과의 간격 설정 */
-      }
-     
-      /* 태그 사이즈 조절 */
-      .form-group input[type="checkbox"] {
-        width: 16px; /* 체크박스 크기 */
-        height: 16px;
-        margin-right: 5px; /* 체크박스와 텍스트 간 간격 */
-        }
-      
-        .form-group input[type="text"], 
-        .form-group input[type="number"] {
-            width: 100%; /* 입력 필드 전체 너비 */
-            height: 40px; /* 높이 조정 */
-            padding: 8px; /* 내부 여백 */
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            font-size: 14px;
-        }
-        .form-group button {
-            width: 80px; /* 버튼 너비 */
-            height: 40px;
-            background-color: #FD5e53;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            margin-top: 5px; /* 간격 조정 */
-        }
-        
-        .form-group button:hover {
-            background-color: #E44A4A; /* 호버 색상 */
-        }
+/* 폼 */
+.store-register-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 
-      /* 태그 사이즈 조절 및 정렬 */
-      .form-group div {
-        display: flex; /* 가로 정렬 */
-        flex-wrap: wrap; /* 필요 시 다음 줄로 넘어가도록 설정 */
-        gap: 10px; /* 태그 간 간격 */
-        margin-top: 10px;
-        align-items: center; /* 체크박스와 텍스트 수직 정렬 */
-       }
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  width: 50%; /* 입력창 너비를 절반으로 설정 */
+}
 
-      /* 메뉴 리스트 세로 정렬 */
-        .form-group div > div {
-            display: flex; /* 내부 요소 가로 정렬 */
-            flex-direction: column; /* 세로로 정렬 */
-            gap: 5px; /* 입력 필드 간 간격 */
-            margin-bottom: 10px;
-        }
+.form-group label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+/* 인풋 필드 */
+input[type="text"],
+input[type="number"],
+input[type="file"],
+textarea,
+select {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+textarea {
+  height: 80px;
+  resize: none;
+}
+
+input[type="file"] {
+  padding: 5px;
+}
+
+/* 체크박스와 라디오 버튼 */
+.radio-container {
+  display: flex; /* 가로 정렬 */
+  gap: 20px; /* 버튼 간 간격 */
+  align-items: center; /* 라디오 버튼과 텍스트 수직 정렬 */
+}
+
+.radio-container label {
+  display: flex; /* 라벨 안에서 가로 정렬 */
+  align-items: center; /* 라디오 버튼과 텍스트 수직 정렬 */
+  gap: 5px; /* 버튼과 텍스트 간 간격 */
+  font-size: 14px;
+}
+
+.radio-container input[type="radio"] {
+  width: 16px; /* 라디오 버튼 크기 */
+  height: 16px;
+}
+
+/* 가로 배열을 위한 부모 컨테이너 */
+.form-group-horizontal {
+  display: flex; /* 가로 정렬 */
+  justify-content: space-between; /* 양쪽으로 균등 배치 */
+  gap: 20px; /* 입력 필드 간 간격 */
+  margin-bottom: 15px; /* 하단 간격 */
+}
+
+/* 각 입력 필드의 컨테이너 */
+.form-item {
+  flex: 1; /* 두 필드가 균등하게 너비를 차지 */
+}
+
+.form-item label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px; /* 라벨과 입력 필드 간 간격 */
+  color: #333;
+}
+
+.form-item input {
+  width: 100%; /* 부모 컨테이너 너비에 맞게 */
+  height: 40px; /* 입력 필드 높이 */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* 전체 사용 영역 가게 상세 내용 */
+.form-group-full {
+  width: 100%; /* 부모 컨테이너의 전체 너비를 사용 */
+  margin-bottom: 15px;
+}
+
+.form-group-full label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.form-group-full textarea {
+  width: 100%;
+  height: 120px; /* 텍스트 영역 높이 설정 */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+  resize: none; /* 크기 조정 비활성화 */
+}
+
+/* 태그 전체 컨테이너 */
+.form-group-tag-custom {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%; /* 전체 너비 */
+}
+
+.tag-label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+/* 태그 아이템 컨테이너 */
+.tags-container-custom {
+  display: flex; /* 가로 정렬 */
+  flex-wrap: wrap; /* 줄바꿈 가능 */
+  gap: 15px; /* 태그 간 간격 */
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  box-sizing: border-box; /* 패딩 포함 */
+  background-color: #ffffff; /* 배경색 추가 (선택사항) */
+}
+
+/* 개별 태그 아이템 */
+.tag-item {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* 체크박스와 텍스트 간 간격 */
+  font-size: 14px;
+  flex-basis: calc(100% / 4 - 15px); /* 한 줄에 4개씩 배치 */
+  box-sizing: border-box;
+}
+
+/* 체크박스 스타일 */
+.tag-checkbox {
+  width: 16px;
+  height: 16px;
+}
+
+.menu-section {
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.menu-label {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.menu-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.menu-name-input {
+  width: 30%; /* 메뉴 이름 입력란 */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.menu-price-input {
+  width: 30%; /* 가격 입력란 */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.menu-remove-button {
+  width: 15%; /* 삭제 버튼 */
+  padding: 10px;
+  background-color: #FD5E53;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.menu-add-button {
+  width: 15%; /* 추가 버튼 */
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.menu-add-button:disabled,
+.menu-remove-button:disabled {
+  background-color: #bbb;
+  cursor: not-allowed;
+}
+
+/* 수정 버튼 */
+.menu-update-button {
+  flex: 1;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.menu-update-button:hover {
+  background-color: #0056b3;
+}
 
 
-      /* 각각 레이블별 */
-      .form-group {
-        display: flex; /* 가로 정렬 */
-        align-items: center; /* 수직 정렬 */
-        flex-direction: row;
-        gap: 10px;
-        margin-bottom: 15px;
-      }
+/* 사진 업로드 섹션 */
+.form-group-photos {
+  margin-bottom: 20px;
+  width: 100%;
+}
 
-      /* 버튼 그룹 */
-      .button-group {
-        display: flex; /* 가로 정렬 */
-        justify-content: space-between; /* 버튼을 양쪽 끝으로 배치 */
-        align-items: center; /* 세로 가운데 정렬 */
-        width: 100%; /* 부모 컨테이너 너비 */
-      }
+.photo-upload-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+}
 
-      /* 이전 버튼 */
-      .prebtn{
-        width: 40%;
-        height: 48px;
-        border: 1px solid #FD5e53;
-        margin-top: 40px;
-        font-weight: 700;
-        background-color: #fff;
-        border-radius: 20px;
-        color: #FD5e53;
-        cursor: pointer;
-        font-size: 20px;
-        margin-bottom: 5%;
-      }
-    
-      /* 저장 버튼 */
-      .savebtn{
-        width: 40%;
-        height: 48px;
-        border: none;
-        margin-top: 40px;
-        font-weight: 700;
-        background-color: #FD5e53;
-        border-radius: 20px;
-        color: #fff;
-        cursor: pointer;
-        font-size: 20px;
-        margin-bottom: 5%;
-      
-      }
-    
+.photo-preview {
+  position: relative;
+  width: calc(20% - 10px); /* 한 행에 5개 */
+  height: 100px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
+.photo-delete-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
 
+.photo-delete-button:hover {
+  background-color: darkred;
+}
 
+.photo-add-button {
+  width: calc(20% - 10px);
+  height: 100px;
+  border: 1px dashed #ddd;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #4caf50;
+  cursor: pointer;
+  background-color: transparent;
+}
 
+.photo-add-button:hover {
+  background-color: #f9f9f9;
+}
 
-  .logoImage {
-    width: 218px; /* 로고 크기 조정 */
-    margin-top: 70px; /* 헤더 대용 여백 */
-    margin-bottom: 20px; /* 폼과 간격 */
-  }
-  
-  label {
-    width: 30%; /* label의 고정 너비 */
-    text-align: left; /* 텍스트 오른쪽 정렬 */
-    font-size: 16px; /* label 텍스트 크기 */
-  }
-  
-  input {
-    width: 70%; /* 고정된 너비 */
-    height: 48px; /* 높이 증가 */
-    padding: 10px; /* 내부 여백 */
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    font-size: 16px; /* 글자 크기 증가 */
-    box-sizing: border-box; /* 패딩 포함 */
-  }
-  
-  button {
-    height: 40px;
-    padding: 0 20px;
-    border: none;
-    border-radius: 20px;
-    background-color: #a890f4;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .input-button-group {
-    display: flex; /* 가로 정렬 */
-    align-items: center; /* 세로 가운데 정렬 */
-    gap: 10px; /* input과 button 사이 간격 */
-    flex: 1;
-  }
-  
-  .input-button-group input {
-    flex: 1; /* 입력 필드가 남은 공간을 차지 */
-    height: 40px;
-    padding: 0 10px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-  }
-  
-  .input-button-group button {
-    width: 12%;
-    height: 40px; /* 버튼 높이를 input과 맞춤 */
-    padding: 0 20px;
-    background-color: #a890f4;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .input-button-group button:hover {
-    background-color: #8a70d4;
-  }
-  
+/* 버튼 */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
 
-  
+.back-button,
+.submit-button {
+  width: 48%;
+  height: 48px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-  
-  
+.back-button {
+  background-color: #fff;
+  color: #ff6b6b;
+  border: 2px solid #ff6b6b;
+}
+
+.back-button:hover {
+  background-color: #ffebeb;
+}
+
+.submit-button {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+}
+
+.submit-button:hover {
+  background-color: #e55b5b;
+}
+

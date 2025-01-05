@@ -138,10 +138,7 @@ const MyStore = () =>{
                 <> 
                 {/* 헤더 */}
                 <div className="store-header">
-                    <h1 className="store-name" 
-                        onClick={() => navigate(`/store/detail/${myStoreDetails.details.id}`)}
-                        style={{ cursor: "pointer" }}
-                    >
+                    <h1 className="store-name">
                     {myStoreDetails.details.name}
                     <button className="store-edit-button" onClick={() => navigate("/mystore/edit")}>
                         <img
