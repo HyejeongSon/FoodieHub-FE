@@ -13,6 +13,16 @@ export async function toggleStoreFavorite(storeId) {
     return await httpRequest("POST", url);
 }
 
+export async function fetchPagedReviews(storeId, page) {
+    const url = `/api/review/store/${storeId}?page=${page}`;
+    return await httpRequest("GET", url);
+}
+
+export async function toggleReviewLike(reviewId) {
+    const url = `/api/review/like/${reviewId}`;
+    return await httpRequest("POST", url);
+}
+
 async function httpRequest(method, url, body = null) {
     const headers = {
         'Content-Type': 'application/json',

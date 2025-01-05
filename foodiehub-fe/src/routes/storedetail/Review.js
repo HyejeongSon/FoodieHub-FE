@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/Review.css";
 
-
 const ReviewStarRating = ({ voteAverage = 0, onRate }) => {
   const [hoveredRating, setHoveredRating] = useState(null);
   const rating = hoveredRating || voteAverage;

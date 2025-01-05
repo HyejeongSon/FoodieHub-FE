@@ -10,19 +10,26 @@ import Review from "../../routes/storedetail/Review";
 import ReviewList from "../../routes/storedetail/ReviewList";
 import MapComponent from "../../components/MapComponent";
 import { useUser } from "../../contexts/UserContext";
-import { fetchStoreDetail, toggleStoreLike, toggleStoreFavorite } from "../../store/StoreDetailStore";
+import { fetchStoreDetail, toggleStoreLike, toggleStoreFavorite, fetchPagedReviews } from "../../store/StoreDetailStore";
 
 const StoreDetail = () => {
   const { storeId } = useParams();
   const { user } = useUser();
   const isLoggedIn = !!user.nickname; // 로그인 여부 확인
-  const [storeDetail, setStoreDetail] = useState(null); // 스토어 상세 정보 상태
-  const [likes, setLikes] = useState(0); // 좋아요 개수
-  const [isLiked, setIsLiked] = useState(false); // 좋아요 여부
-  const [favorites, setFavorites] = useState(0); // 북마크 개수
-  const [isFavorite, setIsFavorite] = useState(false); // 북마크 여부
-  const [error, setError] = useState(null); // 에러 상태
+  // 스토어 상세 정보 상태
+  const [storeDetail, setStoreDetail] = useState(null);
+  // 좋아요 및 북마크 상태
+  const [likes, setLikes] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
+  const [favorites, setFavorites] = useState(0);
+  const [isFavorite, setIsFavorite] = useState(false);
+  // 리뷰 상태
+  const [reviews, setReviews] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [loadingReviews, setLoadingReviews] = useState(false);
   const [loading, setLoading] = useState(true); // 로딩 상태
+  const [error, setError] = useState(null); // 에러 상태
 
   useEffect(() => {
     const getStoreDetail = async () => {
@@ -48,6 +55,32 @@ const StoreDetail = () => {
         setLoading(false);
     }
 }, [storeId]);
+
+const loadReviews = async (page) => {
+  setLoadingReviews(true);
+  try {
+    const data = await fetchPagedReviews(storeId, page);
+    setReviews(data.content);
+    setCurrentPage(data.page);
+    setTotalPages(data.totalPages);
+  } catch (err) {
+    setError("리뷰를 가져오는 중 오류가 발생했습니다.");
+  } finally {
+    setLoadingReviews(false);
+  }
+};
+
+useEffect(() => {
+  if (storeId) {
+      loadReviews(0); // 첫 페이지 로드
+  }
+}, [storeId]);
+
+const handlePageChange = (page) => {
+  if (page >= 0 && page < totalPages) {
+    loadReviews(page);
+  }
+};
 
 const getSettings = (images) => ({
   dots: false,
@@ -94,71 +127,6 @@ const handleFavoriteToggle = async () => {
   const handleClick = () => {
     alert(spanRef.current.innerText);
   }
-
-  // 리뷰리스트 가데이터
-  const review = [
-    {
-      profileImage: "/img/profile1.png",
-      name: "닉네임1",
-      date: "2024-01-01",
-      rating: 4.5,
-      details: {
-        taste: 4.7,
-        price: 4.5,
-        hygiene: 4.8,
-        service: 4.6,
-      },
-      content: "리뷰 내용 1 리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1리뷰 내용 1",
-      likes: 3,
-      image: "/img/review1.png",
-    },
-    {
-      profileImage: "/img/profile2.png",
-      name: "닉네임2",
-      date: "2024-01-02",
-      rating: 4.0,
-      details: {
-        taste: 4.0,
-        price: 4.2,
-        hygiene: 4.1,
-        service: 4.3,
-      },
-      content: "리뷰 내용 2",
-      likes: 5,
-      image: "/img/review2.png",
-    },
-    {
-      profileImage: "/img/profile1.png",
-      name: "닉네임3",
-      date: "2024-01-03",
-      rating: 4.5,
-      details: {
-        taste: 4.7,
-        price: 4.5,
-        hygiene: 4.8,
-        service: 4.6,
-      },
-      content: "리뷰 내용 3",
-      likes: 3,
-      image: "/img/review1.png",
-    },
-    {
-      profileImage: "/img/profile2.png",
-      name: "닉네임4",
-      date: "2024-01-04",
-      rating: 4.0,
-      details: {
-        taste: 4.0,
-        price: 4.2,
-        hygiene: 4.1,
-        service: 4.3,
-      },
-      content: "리뷰 내용 4",
-      likes: 5,
-      image: "/img/review2.png",
-    },
-  ];
-
 
   return (
     <div className="detail-container">
@@ -252,27 +220,68 @@ const handleFavoriteToggle = async () => {
           </div>
         </div>
 
-      {/* Description Section */}
-      <div className="description-section">
-        <div className="intro-section">
-          <h2 className="store-intro">{storeDetail.intro}</h2>
-          <p>
-            {storeDetail.content}
-          </p>
+        {/* Description Section */}
+        <div className="description-section">
+          <div className="intro-section">
+            <h2 className="store-intro">{storeDetail.intro}</h2>
+            <p>
+              {storeDetail.content}
+            </p>
+          </div>
+          <h3>메뉴</h3>
+          {storeDetail?.menus && storeDetail.menus.length > 0 ? (
+            <MenuList menus={storeDetail.menus} />
+          ) : (
+            <p><br></br>메뉴 정보가 없습니다.</p>
+          )}
         </div>
-        <h3>메뉴</h3>
-        {storeDetail?.menus && storeDetail.menus.length > 0 ? (
-          <MenuList menus={storeDetail.menus} />
-        ) : (
-          <p><br></br>메뉴 정보가 없습니다.</p>
-        )}
-      </div>
 
-     {/* Reviews Section */}
-     <div className="reviews-section">
-          <Review />
-          <ReviewList reviews={review} />
-        </div>
+        {/* Reviews Section */}
+        {/* <div className="reviews-section">
+            <Review />
+            <ReviewList reviews={reviews} />
+            {loadingReviews && <p>리뷰를 불러오는 중...</p>}
+            {!hasMore && <p>더 이상 리뷰가 없습니다.</p>}
+        </div> */}
+        <div className="reviews-section">
+            <Review />
+            {loadingReviews ? (
+              <p>리뷰를 불러오는 중...</p>
+            ) : reviews.length > 0 ? (
+              <ReviewList reviews={reviews} />
+            ) : (
+              <p>리뷰가 없습니다.</p>
+            )}
+
+            {/* 페이지 네비게이션 */}
+            <div className="pagination">
+              <button
+                className="pagination-button"
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 0}
+              >
+                이전
+              </button>
+              {[...Array(totalPages)].map((_, index) => (
+                <button
+                  key={index}
+                  className={`pagination-button ${
+                    currentPage === index ? "active" : ""
+                  }`}
+                  onClick={() => handlePageChange(index)}
+                >
+                  {index + 1}
+                </button>
+              ))}
+              <button
+                className="pagination-button"
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages - 1}
+              >
+                다음
+              </button>
+            </div>
+          </div>
       </div>
       ) : loading ? (
         <p>로딩 중...</p>

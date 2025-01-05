@@ -11,31 +11,14 @@ function Main() {
         console.log("Main에서 사용자 상태 확인:", user);
     }, [user]); // 상태 변경 시 렌더링 확인
   
-
-    // URL에서 토큰을 저장하는 훅 호출
-    useTokenStorage();
+    useTokenStorage(); // URL에서 토큰을 저장하는 훅 호출
 
     return (
         <div>
-            {/* 조건부 렌더링: 사용자 정보 */}
-            {/* {user.nickname ? (
-                <div>
-                    <p>사용자 이름: <b>{user.name}</b></p>
-                    <p>사용자 닉네임: <b>{user.nickname}</b></p>
-                    <p>사용자 권한: <b>{user.role}</b></p>
-                    {user.role === "ROLE_ADMIN" && <p>관리자 권한이 있습니다.</p>}
-                </div>
-            ) : (
-                <div>
-                </div>
-            )} */}
-            
             {/* 캐러셀 추가 */}
              <div>
-                {/* <Carousel items={items} /> */}
                 <Carousel />
             </div>
-              
         </div>
     );
 }
