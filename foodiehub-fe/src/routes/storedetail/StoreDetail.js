@@ -56,8 +56,9 @@ const StoreDetail = () => {
     }
 }, [storeId]);
 
-const loadReviews = async (page) => {
+const loadReviews = async (page = 0) => {
   setLoadingReviews(true);
+  setReviews([]); // 기존 리뷰 초기화
   try {
     const data = await fetchPagedReviews(storeId, page);
     setReviews(data.content);
@@ -127,6 +128,10 @@ const handleFavoriteToggle = async () => {
   const handleClick = () => {
     alert(spanRef.current.innerText);
   }
+
+  const handleReviewSubmitted = () => {
+    loadReviews(0); // 첫 페이지를 다시 로드
+  };
 
   return (
     <div className="detail-container">
@@ -237,50 +242,48 @@ const handleFavoriteToggle = async () => {
         </div>
 
         {/* Reviews Section */}
-        {/* <div className="reviews-section">
-            <Review />
-            <ReviewList reviews={reviews} />
-            {loadingReviews && <p>리뷰를 불러오는 중...</p>}
-            {!hasMore && <p>더 이상 리뷰가 없습니다.</p>}
-        </div> */}
         <div className="reviews-section">
-            <Review />
+            <Review onReviewSubmitted={handleReviewSubmitted}/>
             {loadingReviews ? (
               <p>리뷰를 불러오는 중...</p>
             ) : reviews.length > 0 ? (
               <ReviewList reviews={reviews} />
             ) : (
-              <p>리뷰가 없습니다.</p>
+              <div className="reviews-container">
+                <p>리뷰가 없습니다.</p>
+              </div>
             )}
 
             {/* 페이지 네비게이션 */}
-            <div className="pagination">
-              <button
-                className="pagination-button"
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 0}
-              >
-                이전
-              </button>
-              {[...Array(totalPages)].map((_, index) => (
-                <button
-                  key={index}
-                  className={`pagination-button ${
-                    currentPage === index ? "active" : ""
-                  }`}
-                  onClick={() => handlePageChange(index)}
-                >
-                  {index + 1}
-                </button>
-              ))}
-              <button
-                className="pagination-button"
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages - 1}
-              >
-                다음
-              </button>
-            </div>
+            {reviews.length > 0 && (
+                <div className="pagination">
+                    <button
+                        className="pagination-button"
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 0}
+                    >
+                        이전
+                    </button>
+                    {[...Array(totalPages)].map((_, index) => (
+                        <button
+                            key={index}
+                            className={`pagination-button ${
+                                currentPage === index ? "active" : ""
+                            }`}
+                            onClick={() => handlePageChange(index)}
+                        >
+                            {index + 1}
+                        </button>
+                    ))}
+                    <button
+                        className="pagination-button"
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages - 1}
+                    >
+                        다음
+                    </button>
+                </div>
+            )}
           </div>
       </div>
       ) : loading ? (
