@@ -1,0 +1,79 @@
+/* 사진 업로드 컨테이너 */
+.photo-upload-container {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.photo-upload-label {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* 사진 미리보기 및 추가 버튼 레이아웃 */
+.photo-upload-grid {
+  display: flex;
+  flex-wrap: wrap; /* 한 줄에 5개씩 */
+  gap: 10px;
+}
+
+/* 미리보기 박스 */
+.photo-preview {
+  position: relative;
+  width: calc(20% - 10px); /* 한 행에 5개 */
+  height: 100px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 삭제 버튼 */
+.photo-delete-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.photo-delete-button:hover {
+  background-color: darkred;
+}
+
+/* 추가 버튼 */
+.photo-add-button {
+  width: calc(20% - 10px);
+  height: 100px;
+  border: 1px dashed #ddd;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #4caf50;
+  cursor: pointer;
+}
+
+.photo-add-button:hover {
+  background-color: #f9f9f9;
+}
