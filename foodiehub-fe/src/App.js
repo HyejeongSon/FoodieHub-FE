@@ -3,7 +3,6 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { UserProvider } from "./contexts/UserContext"; // UserProvider import
 import Header from "./components/Header"; // 공통 헤더
-import Home from "./routes/home/Home";
 import Main from "./routes/main/Main";
 import Login from "./routes/login/Login";
 import LoginAdmin from "./routes/login/LoginAdmin";
@@ -14,6 +13,7 @@ import EditProfile from "./routes/mypage/EditProfile"
 import ReviewEdit from "./routes/mypage/ReviewEdit";
 import MyStore from "./routes/mystore/MyStore";
 import StoreDetail from "./routes/storedetail/StoreDetail";
+import StoreListDetail from "./routes/main/StoreListDetail";
 
 import StoreRegister from "./routes/mystore/StoreRegister";
 import EditMyStore from "./routes/mystore/EditMyStore";
@@ -40,6 +40,7 @@ function App() {
                     <Route path="/store/detail/:storeId" element={<StoreDetail />} />
                     <Route path="/mystore/edit" element={<EditMyStore />} />
                     <Route path="/mypage/reviewedit" element={<ReviewEdit />} />
+                    <Route path="/list/:type/:tag" element={<StoreListDetail />} />
                 </Routes>
            </UserProvider>
         </Router>

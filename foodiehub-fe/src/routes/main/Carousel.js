@@ -125,12 +125,12 @@ const Carousel = ({ items = [] }) => {
     ],
   });
 
-  const handleDetailButtonClick = (tag) => {
-    navigate(`/list/${tag}`); // 해당 태그의 리스트 페이지로 이동
+  const handleDetailButtonClick = (type, tag) => {
+    navigate(`/list/${type}/${tag}`); // 해당 태그의 리스트 페이지로 이동
   };
 
   const handleDetailStoreButtonClick = (storeId) => {
-    navigate(`/store/detail/${storeId}`); // 해당 태그의 리스트 페이지로 이동
+    navigate(`/store/detail/${storeId}`); // 음식점 상세 페이지로 이동
   };
 
   const truncateText = (text, limit) => {
@@ -172,7 +172,12 @@ const Carousel = ({ items = [] }) => {
               </h3>
               <button
                 className="detail-btn"
-                onClick={() => handleDetailButtonClick(carousel.tag)}
+                onClick={() => 
+                  handleDetailButtonClick(
+                    tags.find((tag) => tag.key === carousel.tag)?.type || "all",
+                    carousel.tag
+                  )
+                }
               >
                 자세히보기
               </button>
