@@ -171,7 +171,7 @@ const ReviewEdit = () => {
       });
 
       if (response.ok) {
-        alert("Review updated successfully!");
+        alert("리뷰가 수정되었습니다.");
         navigate("/mypage");
       } else {
         throw new Error(`Failed to update review: ${response.status}`);

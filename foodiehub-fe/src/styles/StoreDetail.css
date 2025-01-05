@@ -14,7 +14,7 @@
   overflow: hidden;
   padding: 20px;
   font-family: Arial, sans-serif;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 .carousel-section img {
@@ -28,7 +28,7 @@
 .info-section {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
-  gap: 20px;
+  gap: 15px;
   margin-top: 80px;
   height: 400px;
 }
@@ -43,18 +43,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-right: 220px;
+  margin-right: 20px;
 }
 
 .store-name {
   font-size: 24px;
   font-weight: bold;
-}
-
-.rating-section {
-  display: flex;
-  align-items: center;  /* 세로 가운데 정렬 */
-  gap: 5px;  /* 요소 간 간격 */
 }
 
 .star-rating {
@@ -119,15 +113,25 @@
   color: #555; /* 텍스트 색상 */
 }
 
+.tag-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap; /* 태그가 여러 줄로 배치되도록 설정 */
+  gap: 10px; /* 태그 간 간격 */
+  margin-bottom: 5px;
+}
+
 .info-tag-button{
   padding: 5px 15px;
   border: 1px solid #ff6b6b; /* 테두리 추가 */
   background-color: #ffffff;
-  color: #333;
+  color: #ff6b6b;
   border-radius: 20px;
-  text-align: center;
-  width: 35%;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
+
 /* 오른쪽부분 */
 .info-right {
   display: flex;
@@ -256,3 +260,68 @@
   background-color: #218838;
 }
 
+.rating-section {
+  display: flex;
+  align-items: center; /* 세로 가운데 정렬 */
+  gap: 12px; /* 요소 간 간격 */
+}
+
+.like-section, .bookmark-section {
+  display: flex;
+  align-items: center; /* 세로 가운데 정렬 */
+  gap: 8px; /* 아이콘과 숫자 간 간격 */
+  margin-left: 12px;
+}
+
+.icon {
+  width: 20px; /* 아이콘 크기 */
+  height: 20px;
+}
+
+.like-count, .bookmark-count {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* 기본 페이지네이션 컨테이너 스타일 */
+.pagination {
+  display: flex;
+  justify-content: center; /* 가운데 정렬 */
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px; /* 버튼 간격 */
+}
+
+/* 페이지 버튼 기본 스타일 */
+.pagination-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: 1px solid #d8a9f2;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #7a4b8c;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 비활성화된 버튼 */
+.pagination-button:disabled {
+  background-color: #f5f5f5;
+  color: #bbb;
+  cursor: default;
+  border: 1px solid #ddd;
+}
+
+/* 활성화된 페이지 버튼 */
+.pagination-button.active {
+  background-color: #d8a9f2;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* 버튼에 마우스 올릴 때 */
+.pagination-button:hover:not(:disabled) {
+  background-color: #b67cc7;
+  color: #fff;
+}

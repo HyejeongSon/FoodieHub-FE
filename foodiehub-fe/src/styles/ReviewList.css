@@ -19,7 +19,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 /* 리뷰 헤더 */
@@ -36,8 +36,8 @@
 }
 
 .profile-image {
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%; /* 원형으로 만들기 */
   object-fit: cover;
   margin-right: 15px;
@@ -100,12 +100,13 @@
   max-width: 100%;
 }
 
-.review-content {
+.review-content-box {
   flex: 2;
   font-size: 14px;
   color: #555;
   line-height: 1.5;
   word-wrap: break-word;
+  padding: 15px;
 }
 
 .review-image {
@@ -122,6 +123,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: auto; 
 }
 
 .review-likes {
@@ -129,6 +131,10 @@
   color: #888;
 }
 
+.like-icon {
+  width: 17px;
+  height: 17px;
+}
 
 
 
