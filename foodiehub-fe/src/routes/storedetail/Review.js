@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import { useUser } from "../../contexts/UserContext";
 import "../../styles/Review.css";
 
 const ReviewStarRating = ({ voteAverage = 0, onRate }) => {
@@ -30,6 +31,8 @@ const ReviewStarRating = ({ voteAverage = 0, onRate }) => {
 };
 
 const Review = ({ onReviewSubmitted }) => {
+  const { user } = useUser();
+  const isLoggedIn = !!user.nickname;
   const { storeId } = useParams();
   const [isWritingReview, setIsWritingReview] = useState(false);
   const [ratings, setRatings] = useState({
@@ -127,6 +130,10 @@ const Review = ({ onReviewSubmitted }) => {
   };
 
   const handleWriteReview = () => {
+    if (!isLoggedIn) {
+      alert("로그인이 필요합니다.");
+      return;
+    }
     setIsWritingReview((prev) => !prev);
   };
 

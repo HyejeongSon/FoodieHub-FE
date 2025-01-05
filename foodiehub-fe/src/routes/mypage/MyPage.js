@@ -262,7 +262,7 @@ const MyPage = () => {
                     {/* <div className="user-image"> */}
                     <div>
                         <img
-                            src={user.profileimageurl}
+                            src={user.profileimageurl || "/img/default-profile.png"}
                             alt="프로필 사진 미리보기"
                             style={{
                                 width: "70px",

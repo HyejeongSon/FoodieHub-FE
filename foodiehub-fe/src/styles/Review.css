@@ -28,9 +28,9 @@
   float: right; /* 버튼을 오른쪽으로 떠 있도록 설정 */
 }
 
-.write-review-btn:hover {
+/* .write-review-btn:hover {
   text-decoration: underline;
-}
+} */
 
 /* 리뷰 작성란 */
 .review-form {

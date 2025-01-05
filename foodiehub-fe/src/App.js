@@ -25,7 +25,8 @@ function App() {
 
                 <ConditionalHeader /> {/* 조건부 헤더 */}
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    {/* <Route path="/" element={<Home />} /> */}
+                    <Route path="/" element={<Main />} />
                     <Route path="/main" element={<Main />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/login_admin" element={<LoginAdmin />} />

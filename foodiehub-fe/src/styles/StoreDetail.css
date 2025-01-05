@@ -221,9 +221,10 @@
   float: right; /* 버튼을 오른쪽으로 떠 있도록 설정 */
 }
 
-.menu-toggle-btn:hover {
+/* .menu-toggle-btn:hover {
   text-decoration: underline;
-}
+} */
+ 
 .reviews-section {
   padding: 20px;
   border-top: 1px solid #ddd;
