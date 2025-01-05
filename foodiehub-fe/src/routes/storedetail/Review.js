@@ -211,6 +211,7 @@ const Review = ({ onReviewSubmitted }) => {
               placeholder="리뷰를 작성하세요."
               value={reviewText}
               onChange={(e) => setReviewText(e.target.value)}
+              style={{ height: '150px'}}
             />
           </div>
           <button className="submit-review-btn" onClick={handleSubmitReview}>
