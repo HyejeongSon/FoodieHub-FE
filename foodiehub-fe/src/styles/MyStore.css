@@ -22,6 +22,7 @@
 
 .store-edit-button{
   background-color: #ffffff;
+  vertical-align: middle;
 }
 
 .store-subtitle {
@@ -35,9 +36,9 @@
   display: flex;
   justify-content: left;
   align-items: left;
-  gap: 10px;
+  gap: 12px;
   margin-top: 20px;
-  margin-bottom: 60px;
+  margin-bottom: 55px;
 }
 
 .stars {
@@ -87,6 +88,7 @@
   margin-top: 50px;
   margin-bottom: 30px;
   text-align: left;
+  margin-left: 5px;
 }
 
 .adminreview-item {
@@ -134,7 +136,7 @@
 }
                  
 .customer_review_title{
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
 }
 
@@ -148,7 +150,7 @@
   color: #333;
   line-height: 1.6; /* 줄 간격 */
   background: #fff;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   border-radius: 5px;
   text-align: left; /* 텍스트 왼쪽 정렬 */
   width: 100%; /* 컨텐츠의 너비를 부모 컨테이너 전체로 설정 */
@@ -178,4 +180,43 @@
   justify-content: space-between; /* 별점과 날짜를 양쪽 끝으로 배치 */
   align-items: center;
   width: 100%;
+}
+
+.no-reviews-message {
+  font-size: 14px;
+  color: #888; /* 회색 */
+  margin-top: 18px;
+  margin-left: 18px;
+  margin-bottom: 10px;
+}
+
+.register-container {
+  display: flex;
+  flex-direction: column; /* 세로 정렬 */
+  align-items: center; /* 가로 중앙 정렬 */
+  justify-content: center; /* 세로 중앙 정렬 */
+  height: 50vh; /* 화면 높이 전체 */
+  text-align: center;
+  background-color: #f9f9f9; /* 배경색 */
+  padding: 20px;
+}
+
+.register-image {
+  width: 150px; /* 이미지 크기 */
+  height: auto; /* 비율 유지 */
+  margin-bottom: 20px; /* 이미지와 텍스트 간 간격 */
+}
+
+.store-register-text {
+  font-size: 18px; /* 텍스트 크기 */
+  color: #333; /* 텍스트 색상 */
+  font-weight: bold; /* 굵은 텍스트 */
+  cursor: pointer; /* 마우스 오버 시 클릭 포인터 */
+  text-decoration: underline; /* 밑줄 추가 */
+  margin-top: 10px; /* 상단 여백 */
+  transition: color 0.3s ease; /* 호버 시 부드러운 색상 전환 */
+}
+
+.store-register-text:hover {
+  color: #ff6347; /* 호버 시 강조 색상 (예: 토마토 색) */
 }

@@ -8,58 +8,69 @@ const MyStore = () =>{
     const navigate = useNavigate();
     const [myStoreDetails, setMyStoreDetails] =useState(null);
     const [showDetails, setShowDetails] = useState(false);
-    const [reviews, setReviews] = useState([
-        {
-          id: 1,
-          date: "2024-12-10",
-          text: "리뷰 내용이 여기에 들어갑니다. 리뷰 내용이 길 경우, 텍스트가 잘 정렬되도록 처리됩니다.",
-          score: 3.5,
-          image: "#",
-        },
-        {
-          id: 2,
-          date: "2024-12-10",
-          text: "이 식당의 평균 별점입니다.",
-          score: 4.5,
-          image: "#",
-        },
-      ]);
+    const [reviews, setReviews] = useState([]);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // 삭제 모달 상태
     const [selectedItem, setSelectedItem] = useState(null); // 삭제할 항목 상태
     
-    // API 호출 함수
-    const fetchDeleteReview = async (id) => {
+    const fetchStoreReviews = async (storeId) => {
         try {
-        const response = await fetch(`/api/reviews/${id}`, {
-            method: "DELETE",
-            headers: {
-            "Content-Type": "application/json",
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error("리뷰 삭제 요청 실패");
-        }
-
-        return true;
+            const response = await fetch(`/api/review/mystore/${storeId}`, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            });
+    
+            if (!response.ok) {
+                throw new Error("리뷰 데이터를 가져오는데 실패했습니다.");
+            }
+    
+            const data = await response.json();
+            setReviews(data);
         } catch (error) {
-        console.error("리뷰 삭제 중 오류 발생:", error);
-        return false;
+            console.error("리뷰 데이터를 가져오는 중 오류 발생:", error);
+        }
+    };
+    
+    useEffect(() => {
+        if (myStoreDetails && myStoreDetails.details && myStoreDetails.details.id) {
+            fetchStoreReviews(myStoreDetails.details.id);
+        }
+    }, [myStoreDetails]);
+
+    // API 호출 함수
+    const fetchDeleteReview = async (reviewId) => {
+        try {
+            const response = await fetch(`/api/review/${reviewId}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+    
+            if (!response.ok) {
+                throw new Error("리뷰 삭제 요청 실패");
+            }
+    
+            const result = await response.json();
+            return result;
+        } catch (error) {
+            console.error("리뷰 삭제 중 오류 발생:", error);
+            return false;
         }
     };
 
     // 삭제 확인 함수
     const confirmDelete = async () => {
+        if (!selectedItem) return; // 선택된 항목이 없으면 종료
         try {
-        const response = await fetchDeleteReview(selectedItem.id);
-        if (response) {
-            setReviews((prev) => prev.filter((review) => review.id !== selectedItem.id));
-        }
-        setIsDeleteModalOpen(false); // 삭제 모달 닫기
-        setSelectedItem(null); // 선택 항목 초기화
+            const response = await fetchDeleteReview(selectedItem.id);
+            if (response) {
+                setReviews((prev) => prev.filter((review) => review.id !== selectedItem.id)); // 리뷰 삭제 후 목록 갱신
+            }
+            setIsDeleteModalOpen(false); // 삭제 모달 닫기
+            setSelectedItem(null); // 선택 항목 초기화
         } catch (err) {
-        console.error("삭제 중 오류 발생:", err);
-        alert("삭제에 실패했습니다.");
+            console.error("삭제 중 오류 발생:", err);
+            alert("삭제 처리 중 문제가 발생했습니다.");
         }
     };
 
@@ -83,7 +94,7 @@ const MyStore = () =>{
         try{
             const details = await getDetails("GET","/api/mystore/details");
 
-            console.log("details:",details);
+            console.log("details:", details);
             setMyStoreDetails(details); // 상태 업데이트
         }catch(error){
             console.error("사용자 정보 가져오기 오류:", error);
@@ -115,7 +126,6 @@ const MyStore = () =>{
                         className="register-image"
                     />
                     <h1
-                        // className="underline-link"
                         className="store-register-text"
                         onClick={() => navigate("/store_register")}
                     >
@@ -128,7 +138,10 @@ const MyStore = () =>{
                 <> 
                 {/* 헤더 */}
                 <div className="store-header">
-                    <h1 className="store-name">
+                    <h1 className="store-name" 
+                        onClick={() => navigate(`/store/detail/${myStoreDetails.details.id}`)}
+                        style={{ cursor: "pointer" }}
+                    >
                     {myStoreDetails.details.name}
                     <button className="store-edit-button" onClick={() => navigate("/mystore/edit")}>
                         <img
@@ -188,24 +201,26 @@ const MyStore = () =>{
                 {/* 리뷰 섹션 */}
                 <div className="review-section">
                     <h2 className="store_review_list">가게 리뷰({reviews.length})</h2>
+                    {reviews.length === 0 && ( <p className="no-reviews-message">리뷰가 없습니다.</p>) }
                     {/* 리뷰 항목들 */}
                     {reviews.map((review) => (
                         <div key={review.id} className="adminreview-item">
                             {/* 왼쪽 이미지 */}
+                            {review.reviewImage && (
                             <div className="review-left">
-                            <img src={review.image} alt="리뷰 이미지" className="review-image" />
-                            </div>
+                            <img src={`/api/review/image/${review.reviewImage}` || "/img/default-review.png"} alt="리뷰 이미지" className="review-image" />
+                            </div>) }
 
                             {/* 오른쪽 내용 */}
                             <div className="review-right">
                             {/* 리뷰 헤더 */}
                             <div className="review-header">
-                                <p className="customer_review_title">리뷰 제목</p>
-                                <p><StarRating /> /5</p>
+                                <p className="customer_review_title">{review.nickname}</p>
+                                <p><StarRating key={review.id} id={review.id} num={review.avgRating} /> {review.avgRating}/5</p>
                             </div>
                             <div className="date-del-section">
-                                <p className="date">Date: {review.date}</p>
-                                <button className="store-review-del-button" onClick={handleDelete}>
+                                <p className="date">Date: {new Date(review.createDate).toLocaleDateString()}</p>
+                                <button className="store-review-del-button" onClick={() => handleDelete(review)}>
                                 <img
                                     src="/img/del.png"
                                     alt="삭제 아이콘"
@@ -215,7 +230,7 @@ const MyStore = () =>{
                             </div>
                             {/* 리뷰 내용 */}
                             <div className="customer-review-content">
-                                <p className="text">{review.text}</p>
+                                <p className="text">{review.content}</p>
                             </div>
                             </div>
                         </div>

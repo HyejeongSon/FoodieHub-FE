@@ -153,7 +153,7 @@ const handleFavoriteToggle = async () => {
           {/* 왼쪽 정보 */}
           <div className="info-left">
             <div className="info-header">
-              <h1 className="store-name">{storeDetail.name}</h1>
+              <h1 className="store-name-detail">{storeDetail.name}</h1>
               <div className="rating-section">
                 <div className="star-rating"><StarRating key={storeDetail.id} id={storeDetail.id} num={storeDetail.avgRating}/></div>
                 <span className="rating-text">{storeDetail.avgRating} / 5</span>
