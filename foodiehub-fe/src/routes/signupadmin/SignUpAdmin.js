@@ -53,7 +53,7 @@ const SignUp = () => {
                 response.data.match_cnt === 1 &&
                 response.data.data[0].b_stt === "계속사업자"
             ) {
-                setApiResult("API 조회 성공: 계속사업자");
+                setApiResult("사업자 조회 성공: 계속사업자");
                 setIsBusinessValid(true);
             } else {
                 setApiResult("계속사업자가 아닙니다.");
