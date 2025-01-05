@@ -53,10 +53,11 @@ const SignUp = () => {
                 response.data.match_cnt === 1 &&
                 response.data.data[0].b_stt === "계속사업자"
             ) {
-                setApiResult("API 조회 성공: 계속사업자");
+                setApiResult();
                 setIsBusinessValid(true);
+                alert("API 조회 성공: 계속사업자");
             } else {
-                setApiResult("계속사업자가 아닙니다.");
+                setApiResult();
                 setIsBusinessValid(false);
                 alert("계속사업자만 회원가입이 가능합니다.");
             }
@@ -91,12 +92,12 @@ const SignUp = () => {
     };
     
     return (
-    <div className="admin-container">
+    <div className="biz-admin-container">
         <img src={logo} alt="푸디허브 로고" className="logoImage" />
-        <div className="adminsignup-title">
-            <p class="adminTitle">사장님 회원가입</p>
-            <hr className="divider" />
-            <form className="adminsignup-form" onSubmit={handleSubmit}>
+        <div className="biz-adminsignup-title">
+            <p class="biz-adminTitle">사장님 회원가입</p>
+            <hr className="biz-divider" />
+            <form className="biz-adminsignup-form" onSubmit={handleSubmit}>
                 {apiResult && <div>{apiResult}</div>}
 
                 {errors.length > 0 && (
@@ -140,7 +141,7 @@ const SignUp = () => {
                         name="password2"
                         value={formData.confirmPassword}
                         onChange={handleInputChange}
-                        placeholder="비밀번호를 다시 입력하세요"
+                        placeholder="비밀번호를 재입력 하세요"
                     />
                 </div>
 
@@ -177,17 +178,21 @@ const SignUp = () => {
                     />
                 </div>
 
-                <div className="input-button-group">
+                <div className="form-group">
                     <label>사업자 등록번호</label>
-                    <input
-                        type="text"
-                        name="businessno"
-                        value={formData.businessno}
-                        onChange={handleInputChange}
-                    />
-                    <button type="button" onClick={checkBusinessStatus}>
-                        조회
-                    </button>
+                    <div className="biz-input-button-container">
+                        <input
+                            type="text"
+                            name="businessno"
+                            value={formData.businessno}
+                            onChange={handleInputChange}
+                        />
+                        
+                        <button type="button" onClick={checkBusinessStatus}>
+                            조회
+                        </button>
+                        
+                    </div>
                 </div>
                  {/* 회원가입 버튼 */}
                 <div className="button-group">

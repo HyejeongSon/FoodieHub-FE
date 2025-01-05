@@ -1,4 +1,4 @@
-.admin-container {
+.biz-admin-container {
   display: flex;
   flex-direction: column; /* 세로 정렬 */
   align-items: center; /* 가로 가운데 정렬 */
@@ -14,12 +14,12 @@
 
 }
 
-.adminTitle{
+.biz-adminTitle{
   text-align: center;
   font-size: 28px;
 }
 
-.divider {
+.biz-divider {
   border: none; /* 기본 테두리 제거 */
   border-top: 3px solid #000000; /* 윗부분에 선 추가 */
   margin: 20px 0; /* 위아래 간격 */
@@ -28,7 +28,7 @@
   margin-bottom: 8%;
 }
 
-.adminsignup-form{
+.biz-adminsignup-form{
   display: flex;
   flex-direction: column;
   width: 600px; /* 너비를 고정값으로 설정 */
@@ -44,13 +44,13 @@
 }
 
 label {
-  width: 30%; /* label의 고정 너비 */
+  width: 40%; /* label의 고정 너비 */
   text-align: left; /* 텍스트 오른쪽 정렬 */
   font-size: 16px; /* label 텍스트 크기 */
 }
 
 input {
-  width: 70%; /* 고정된 너비 */
+  width: 100%; /* 고정된 너비 */
   height: 48px; /* 높이 증가 */
   padding: 10px; /* 내부 여백 */
   border: 1px solid #ccc;
@@ -137,3 +137,20 @@ button {
   margin-bottom: 5%;
 }
 
+.biz-input-button-container {
+  display: flex; /* 가로 정렬 */
+  gap: 10px; /* 입력창과 버튼 사이 간격 */
+  width: 100%; /* 컨테이너 전체 너비 */
+}
+
+.biz-input-button-container button {
+  width: 30%; /* 버튼 너비 */
+  height: 40px; /* 입력창 높이와 동일 */
+  padding: 0 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: #a890f4;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
