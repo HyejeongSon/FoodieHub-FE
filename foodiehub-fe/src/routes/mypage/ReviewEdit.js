@@ -12,7 +12,7 @@ const StarRating = ({ voteAverage = 0, onRate }) => {
       onRate(value);
     }
   };
-  
+
   return (
     <div className="star-rating">
       {[1, 2, 3, 4, 5].map((star) => (
@@ -251,18 +251,56 @@ const ReviewEdit = () => {
               value={review.content || ""}
               onChange={handleContentChange}
               placeholder="리뷰를 입력해주세요."
+              style={{
+                width: '230%',
+                height: '150px',
+                padding: '10px',
+                fontSize: '14px',
+                borderRadius: '5px',
+                resize: 'none',
+                boxSizing: 'border-box',
+              }}
             />
           </div>
         </div>
       </div>
-      <div className="action-buttons">
-        <button className="submit-button" onClick={handleSubmit}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          gap: '10px',
+        }}
+      >
+        <button
+          style={{
+            backgroundColor: '#21bf73',
+            color: 'white',
+            padding: '10px 20px',
+            border: 'none',
+            borderRadius: '5px',
+            fontSize: '14px',
+            cursor: 'pointer',
+          }}
+          onClick={handleSubmit}
+        >
           수정
         </button>
-        <button className="cancel-button" onClick={handleCancel}>
+        <button
+          style={{
+            backgroundColor: '#ccc',
+            color: 'black',
+            padding: '10px 20px',
+            border: 'none',
+            borderRadius: '5px',
+            fontSize: '14px',
+            cursor: 'pointer',
+          }}
+          onClick={handleCancel}
+        >
           취소
         </button>
       </div>
+
     </div>
   );
 };
