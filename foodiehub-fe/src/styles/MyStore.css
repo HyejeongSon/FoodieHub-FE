@@ -1,49 +1,181 @@
-.underline-link {
-  display: inline-block; /* 텍스트 크기만큼 영역 제한 */
-  border-bottom: 2px solid black; /* 밑줄 설정 */
-  cursor: pointer; /* 클릭 가능 표시 */
-  text-align: center; /* 중앙 정렬 */
-  margin: 0 auto; /* 여백 자동 설정 */
+.admin-mypage-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left; /* 왼쪽 정렬 */
 }
 
-
-.underline-link:hover {
-  color: #007bff; /* 호버 시 텍스트 색상 변경 */
-  border-bottom-color: #007bff; /* 호버 시 밑줄 색상 변경 */
+.store-header {
+  margin-bottom: 20px;
+  text-align: left; /* 왼쪽 정렬 */
 }
 
-.mystore-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column; /* 세로 정렬 */
-  min-height: 85vh; /* 화면 높이를 조금 더 줄임 */
-  /* background-color: #f9f9f9; */
-}
-
-.register-container {
-  display: flex;
-  flex-direction: column; /* 이미지와 텍스트를 세로 정렬 */
-  align-items: center; /* 수평 중앙 정렬 */
-  text-align: center;
-  margin-top: -500px; /* 전체 컨테이너를 더 위로 이동 */
-}
-
-.register-image {
-  width: 200px; /* 이미지 크기 조정 */
-  height: auto;
-  margin-bottom: 20px; /* 이미지와 텍스트 사이 여백 */
-}
-
-.store-register-text {
+.store-name {
   font-size: 24px;
-  color: #ff4d4f;
   font-weight: bold;
-  cursor: pointer;
-  text-decoration: underline;
-  text-align: center; /* 텍스트 중앙 정렬 */
+  margin-bottom: 20px;
+  margin-left: 18px;
 }
 
-.store-register-text:hover {
-  color: #ff7875;
+.store-edit-button{
+  background-color: #ffffff;
+}
+
+.store-subtitle {
+  font-size: 14px;
+  color: #666;
+  text-align: left;
+  margin-left: 18px;
+}
+
+.store-rating {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 60px;
+}
+
+.stars {
+  color: #ffbf00;
+}
+
+.details-title{
+  margin-bottom: 20px;
+}
+.more-button {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.more-button:hover {
+  text-decoration: underline;
+}
+
+.details-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 한 행에 2개 */
+  gap: 20px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.details-category{
+  padding: auto;
+  margin-bottom: 10px;
+}
+
+.divider{
+  border: none !important; /* 기본 테두리 제거 */
+  border-top: 2px solid #676767 !important; /* 윗부분에 얇은 선 추가 */
+  width: 100% !important; /* 밑줄 길이 조정 */
+  margin: 10px auto !important; /* 상하 여백과 가운데 정렬 */
+}
+
+
+.review-section {
+  margin-top: 20px;
+}
+
+.store_review_list{
+  margin-top: 50px;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.adminreview-item {
+  display: flex; /* Flexbox로 레이아웃 설정 */
+  align-items: flex-start; /* 상단 정렬 */
+  gap: 20px; /* 이미지와 내용 사이 간격 */
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background: #ffffff;
+  max-height: 300px;
+}
+
+.review-left {
+  flex: 0 0 30%; /* 이미지 영역 30% */
+  display: flex;
+  justify-content: center; /* 이미지 가운데 정렬 */
+  align-items: center; /* 이미지 가운데 정렬 */
+  background: #f5f5f5; /* 이미지 배경 */
+  border-radius: 5px;
+}
+
+.review-image {
+  width: 100%; /* 이미지가 컨테이너를 채움 */
+  height: auto;
+  object-fit: cover; /* 이미지 비율 유지 */
+  max-height: 200px; /* 이미지 최대 높이 설정 */
+}
+
+.review-right {
+  flex: 1; /* 남은 공간을 차지 */
+  display: flex;
+  flex-direction: column; /* 세로 정렬 */
+  justify-content: flex-start; /* 내용 상단 정렬 */
+  align-items: flex-start; /* 내용 왼쪽 정렬 */
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between; /* 별점과 날짜를 양쪽 끝으로 배치 */
+  align-items: center;
+  margin-bottom: 10px; /* 아래쪽 간격 */
+  width: 100%;
+}
+                 
+.customer_review_title{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.date {
+  font-size: 12px;
+  color: #666;
+}
+
+.customer-review-content {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6; /* 줄 간격 */
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: left; /* 텍스트 왼쪽 정렬 */
+  width: 100%; /* 컨텐츠의 너비를 부모 컨테이너 전체로 설정 */
+  margin-top: 10px;
+}
+
+.del-icon{
+  width: 20px; /* 아이콘 너비 */
+  height: 20px; /* 아이콘 높이 */
+  cursor: pointer; /* 클릭 가능 마우스 포인터 */
+  margin-left: 50%; /* 텍스트와 간격 */
+}
+
+.store-review-del-button{
+  background: none; /* 배경 제거 */
+  border: none; /* 테두리 제거 */
+  padding: 0; /* 여백 제거 */
+  cursor: pointer; /* 클릭 가능 마우스 포인터 */
+  display: flex; /* 아이콘을 중앙 정렬 */
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  margin-left: auto !important; /* 삭제 버튼을 오른쪽 끝으로 이동 */
+}
+
+.date-del-section {
+  display: flex;
+  justify-content: space-between; /* 별점과 날짜를 양쪽 끝으로 배치 */
+  align-items: center;
+  width: 100%;
 }
