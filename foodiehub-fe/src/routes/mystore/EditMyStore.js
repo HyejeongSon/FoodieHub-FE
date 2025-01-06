@@ -395,75 +395,141 @@ function EditMyStore() {
 
 
       <div className="store-register-form">
-        <div className="photo-upload-container">
-          <label>사진 업로드:</label>
+  <div className="photo-upload-container">
+    <label>사진 업로드:</label>
 
-          {/* 기존 업로드된 이미지 */}
-          {images.map((image) => (
-            <div key={image.id}>
-              <img
-                src={`/api/store/image/${image.storeImageName}`}
-                alt="이미지"
-                style={{
-                  width: '100px',
-                  height: '100px',
-                  objectFit: 'cover',
-                  borderRadius: '5px',
-                  marginBottom: '5px',
-                }}
-              />
-              <button onClick={() => deleteImage(image.id)}>삭제</button>
-            </div>
-          ))}
-
-          {/* 선택된 이미지 미리보기 */}
-          {imagePreview ? (
-            <div>
-              <img
-                src={imagePreview}
-                alt="미리보기"
-                style={{
-                  width: '100px',
-                  height: '100px',
-                  objectFit: 'cover',
-                  borderRadius: '5px',
-                  marginBottom: '5px',
-                }}
-              />
-              <button
-                onClick={() => {
-                  setNewImage(null); // 선택된 이미지 초기화
-                  setImagePreview(null); // 미리보기 초기화
-                }}
-              >
-                미리보기 삭제
-              </button>
-            </div>
-          ) : (
-            // "+" 버튼
-            <button
-              type="button"
-              className="photo-add-button"
-              onClick={() => fileInputRef.current.click()}
-            >
-              +
-            </button>
-          )}
-
-          <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            style={{ display: 'none' }}
-            onChange={handleImageChange} // 이미지 변경 핸들러
+    {/* 기존 업로드된 이미지 */}
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+      {images.map((image) => (
+        <div
+          key={image.id}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '110px',
+          }}
+        >
+          <img
+            src={`/api/store/image/${image.storeImageName}`}
+            alt="이미지"
+            style={{
+              width: '100px',
+              height: '100px',
+              objectFit: 'cover',
+              borderRadius: '5px',
+              marginBottom: '5px',
+            }}
           />
+          <button
+            onClick={() => deleteImage(image.id)}
+            style={{
+              backgroundColor: '#d9afff',
+              border: 'none',
+              borderRadius: '20px',
+              padding: '5px 10px',
+              cursor: 'pointer',
+              fontSize: '12px',
+            }}
+          >
+            삭제
+          </button>
         </div>
+      ))}
 
-      </div>
-      <div className="Editinfo_button">
-        <button className="image-upload-button" onClick={addImage}>사진 등록</button>
-      </div>
+      {/* 선택된 이미지 미리보기 */}
+      {imagePreview ? (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '110px',
+          }}
+        >
+          <img
+            src={imagePreview}
+            alt="미리보기"
+            style={{
+              width: '100px',
+              height: '100px',
+              objectFit: 'cover',
+              borderRadius: '5px',
+              marginBottom: '5px',
+            }}
+          />
+          <button
+            onClick={() => {
+              setNewImage(null); // 선택된 이미지 초기화
+              setImagePreview(null); // 미리보기 초기화
+            }}
+            style={{
+              backgroundColor: '#d9afff',
+              border: 'none',
+              borderRadius: '20px',
+              padding: '5px 10px',
+              cursor: 'pointer',
+              fontSize: '12px',
+            }}
+          >
+            미리보기 삭제
+          </button>
+        </div>
+      ) : (
+        // "+" 버튼
+        <button
+          type="button"
+          className="photo-add-button"
+          onClick={() => fileInputRef.current.click()}
+          style={{
+            width: '100px',
+            height: '100px',
+            fontSize: '24px',
+            backgroundColor: '#f5f5f5',
+            border: '1px dashed #ccc',
+            borderRadius: '5px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+          }}
+        >
+          +
+        </button>
+      )}
     </div>
+
+    <input
+      type="file"
+      accept="image/*"
+      ref={fileInputRef}
+      style={{ display: 'none' }}
+      onChange={handleImageChange} // 이미지 변경 핸들러
+    />
+  </div>
+
+  <div className="Editinfo_button" style={{ marginTop: '20px', textAlign: 'center' }}>
+    <button
+      className="image-upload-button"
+      onClick={addImage}
+      style={{
+        backgroundColor: '#ff6b6b',
+        border: 'none',
+        color: 'white',
+        borderRadius: '25px',
+        padding: '10px 20px',
+        cursor: 'pointer',
+        fontSize: '14px',
+        maxWidth: '120px',
+      }}
+    >
+      사진 등록
+    </button>
+  </div>
+</div>
+</div>
   );
 }
 
