@@ -305,12 +305,58 @@ const EditProfile = () => {
                     />
                 </div>
                 }
-                <div className="buttons">
-                    <button className="back-button" type="button" onClick={() => navigate('/mypage')}>
-                    이전
-                    </button>
-                    <button className="save-button" type="submit">저장</button>
-                </div>
+                <div
+  className="buttons"
+  style={{
+    display: 'flex',
+    gap: '15px',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }}
+>
+  <button
+    className="back-button"
+    type="button"
+    onClick={() => navigate('/mypage')}
+    style={{
+      border: '2px solid #ff6b6b',
+      borderRadius: '20px',
+      padding: '12px 30px',
+      fontSize: '18px',
+      color: '#ff6b6b',
+      backgroundColor: 'transparent',
+      cursor: 'pointer',
+      transition: 'all 0.3s ease',
+      width: '100px', // 버튼 크기 통일
+      textAlign: 'center',
+    }}
+    onMouseEnter={(e) => (e.target.style.backgroundColor = '#ffe5e5')}
+    onMouseLeave={(e) => (e.target.style.backgroundColor = 'transparent')}
+  >
+    이전
+  </button>
+  <button
+    className="save-button"
+    type="submit"
+    style={{
+      border: '2px solid #ff6b6b',
+      borderRadius: '20px',
+      padding: '10px 0px 35px 0px',
+      fontSize: '18px',
+      color: '#ff6b6b',
+      backgroundColor: 'transparent',
+      cursor: 'pointer',
+      transition: 'all 0.3s ease',
+      width: '100px', // 버튼 크기 통일
+      textAlign: 'center',
+    }}
+    onMouseEnter={(e) => (e.target.style.backgroundColor = '#ffe5e5')}
+    onMouseLeave={(e) => (e.target.style.backgroundColor = 'transparent')}
+  >
+    저장
+  </button>
+</div>
+
       
             </form>
 
