@@ -110,7 +110,7 @@ const SignUp = () => {
                     </div>
                 )}
 
-                <div className='form-group'>
+                <div className='form-group-signup'>
                     <label htmlFor="email">아이디(Email)</label>
                     <input
                         className="adminInput"
@@ -123,7 +123,7 @@ const SignUp = () => {
                     />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group-signup">
                     <label htmlFor="password">비밀번호</label>
                     <input
                         type="password"
@@ -134,7 +134,7 @@ const SignUp = () => {
                     />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group-signup">
                     <label htmlFor="confirmPassword">비밀번호 확인</label>
                     <input
                         type="password"
@@ -145,7 +145,7 @@ const SignUp = () => {
                     />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group-signup">
                     <label>닉네임</label>
                     <input
                         type="text"
@@ -156,7 +156,7 @@ const SignUp = () => {
                     />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group-signup">
                     <label>실명</label>
                     <input
                         type="text"
@@ -167,7 +167,7 @@ const SignUp = () => {
                     />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group-signup">
                     <label>전화번호</label>
                     <input
                         type="text"
@@ -178,7 +178,7 @@ const SignUp = () => {
                     />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group-signup">
                     <label>사업자 등록번호</label>
                     <div className="biz-input-button-container">
                         <input

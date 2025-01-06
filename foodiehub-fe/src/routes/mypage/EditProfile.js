@@ -252,7 +252,7 @@ const EditProfile = () => {
                     {/* <input type="file" accept="image/*" onChange={handleImageChange} /> */}
                 </div>
 
-                <div className="form-group">
+                <div className="form-group-edit">
                     <label>이메일</label>
                     <input
                         type="email"
@@ -262,7 +262,7 @@ const EditProfile = () => {
                     />
                 </div>
                 
-                <div className="form-group">
+                <div className="form-group-edit">
                     <label>닉네임</label>
                     <input
                         type="text"
@@ -272,7 +272,7 @@ const EditProfile = () => {
                     />
                 </div>
    
-                <div className="form-group">
+                <div className="form-group-edit">
                     <label>전화번호</label>
                     <input
                         type="text"
@@ -282,7 +282,7 @@ const EditProfile = () => {
                     />
                 </div>
                 { user.role === "ROLE_ADMIN" &&
-                <div className="form-group">
+                <div className="form-group-edit">
 
                     <label>현재 비밀번호</label>
                     <input
@@ -294,7 +294,7 @@ const EditProfile = () => {
                 </div>
                 }
                 { user.role === "ROLE_ADMIN" &&
-                <div className="form-group">
+                <div className="form-group-edit">
 
                     <label>새 비밀번호</label>
                     <input
